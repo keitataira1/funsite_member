@@ -26,7 +26,7 @@
                 ログイン
             </li>
             <li>
-                ○○さん
+				ゲスト
             </li>
             <li class="clear">
             </li>
@@ -34,6 +34,7 @@
     </nav>
     <main>
         <form th:action="@{/user/login_process}" method="post" th:object="${login}">
+         <div th:if="message">[[${message}]]</div>
          <div style="width:100%;">
             <table>
                 <tr>
@@ -51,11 +52,11 @@
 
                 </tr>
             </table>
-
          </div>
          <div>
              <input type="submit" value="ログイン" />
          </div>
+         
         </form>
     </main>
 </body>
