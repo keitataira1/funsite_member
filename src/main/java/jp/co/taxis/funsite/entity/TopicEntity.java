@@ -22,7 +22,7 @@ public class TopicEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private String id;
+	private Integer id;
 	
 	@Column(name = "player_id")
 	private String playerId;
