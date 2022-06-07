@@ -14,6 +14,7 @@ import jp.co.taxis.funsite.service.PlayerService;
 import jp.co.taxis.funsite.service.TopicService;
 
 @Controller
+@RequestMapping("index")
 public class PlayerListController {
 	
 	@Autowired
