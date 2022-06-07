@@ -22,4 +22,9 @@ public class MemberService {
 		return memberList;
 	}
 
+	public MemberEntity insert(MemberEntity member) {
+		MemberEntity resultMember = memberRepository.save(member);
+		return resultMember;
+	}
+
 }
