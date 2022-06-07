@@ -15,10 +15,10 @@ import lombok.NoArgsConstructor;
 public class MemberForm {
 
 	@NotEmpty
-	@Pattern(regexp = "[1-20]")
+	@Pattern(regexp = ".{1-20}")
 	private String mail;
 	@NotEmpty
-	@Pattern(regexp = "[1-10]")
+	@Pattern(regexp = ".{1-10}")
 	private String password;
 	private String realName;
 	private String memberName;
