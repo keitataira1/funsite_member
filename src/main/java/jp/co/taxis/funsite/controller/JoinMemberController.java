@@ -42,6 +42,9 @@ public class JoinMemberController {
 		if (result.hasErrors()) {
 			return "input";
 		}
+		
+		memberService.insert(null);//引数見直し必要
+		
 		return "confirm";
 	}
 
