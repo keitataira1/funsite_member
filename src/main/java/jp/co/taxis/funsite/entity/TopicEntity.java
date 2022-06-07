@@ -36,4 +36,5 @@ public class TopicEntity {
 	@Column(name = "version")
 	@Version
 	private int version;
+	
 }
