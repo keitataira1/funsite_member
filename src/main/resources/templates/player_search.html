@@ -9,7 +9,7 @@
 
 <body>
 
-  <form th:action="@{/player/search2}" method="post" th:object="${player}">
+  <form th:action="@{/player/search}" method="post" th:object="${player}">
     <nav>
         <ul>
 
@@ -54,48 +54,13 @@
                         ポジション
                     </td>
                 </tr>
-                <tr>
+                <tr th:eath="player:${playerList}" >
                     <td>
-                        <a href="detail.html">○○　○○</a>
+                        <a href="detail.html" th:text="${player.name}"></a>
                     </td>
-                    <td>
-                        2011生3月3日
+                    <td th:text="${player.birthday}">                        
                     </td>
-                    <td>
-                        フォワード
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="detail.html">○○　○○</a>
-                    </td>
-                    <td>
-                        2011生3月3日
-                    </td>
-                    <td>
-                        ディフェンス
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="detail.html">○○　○○</a>
-                    </td>
-                    <td>
-                        2011生3月3日
-                    </td>
-                    <td>
-                        ミッドフィルダー
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <a href="detail.html">○○　○○</a>
-                    </td>
-                    <td>
-                        2011生3月3日
-                    </td>
-                    <td>
-                        キーパー
+                    <td th:text="${player.position}">
                     </td>
                 </tr>
             </table>
