@@ -30,7 +30,7 @@ public class JoinMemberController {
 	}
 
 	/**
-	 * 会員登録確認画面表示メソッド
+	 * 会員登録入力確認画面表示メソッド
 	 * 
 	 * @param memberForm
 	 * @param result

@@ -23,7 +23,7 @@ public class MemberService {
 		return memberList;
 	}
 
-	public MemberEntity insert(MemberEntity member) {
+	public MemberEntity insert(MemberEntity member) {//入力されたメアドと会員名がDBにすでに存在する場合エラー
 		
 		MemberEntity returnntity = memberRepository.selectByMailAddlessAndName(member.getMailAddress(),
 				member.getName());
