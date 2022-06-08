@@ -48,7 +48,7 @@
                 <th>順位</th>
                 <th>TOPIC</th>
             </tr>
-            <tr th:each="topic, : ${topicList}">
+            <tr th:each="topic : ${topicList}">
                 <td >1</td>
                 <td th:text="${topic.topic}"></td>
             </tr>
@@ -57,7 +57,7 @@
             <li th:each="player : ${playerList}">
                 <div>
                     <a href="player/detail.html">
-                        <img src="${player.img}" />
+                        <img src="${player.image}" />
                     </a>
                 </div>
                 <div th:text="${player.name}">選手</div>
