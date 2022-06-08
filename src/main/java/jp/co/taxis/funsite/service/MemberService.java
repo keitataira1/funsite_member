@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jp.co.taxis.funsite.entity.MemberEntity;
+import jp.co.taxis.funsite.exception.ApplicationException;
 import jp.co.taxis.funsite.repository.MemberRepository;
 
 @Transactional
@@ -20,6 +21,18 @@ public class MemberService {
 	public List<MemberEntity> selectAll() {
 		List<MemberEntity> memberList = memberRepository.findAll();
 		return memberList;
+	}
+
+	public MemberEntity insert(MemberEntity member) {//入力されたメアドと会員名がDBにすでに存在する場合エラー
+		
+		MemberEntity returnntity = memberRepository.selectByMailAddlessAndName(member.getMailAddress(),
+				member.getName());
+
+		if (returnntity != null)
+			throw new ApplicationException("login.error");
+		
+		MemberEntity resultMember = memberRepository.save(member);
+		return resultMember;
 	}
 
 }

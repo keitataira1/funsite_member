@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import jp.co.taxis.funsite.entity.PlayerEntity;
 import jp.co.taxis.funsite.form.PlayerForm;
 import jp.co.taxis.funsite.service.PlayerService;
 import jp.co.taxis.funsite.service.TopicService;
@@ -32,7 +31,7 @@ public class PlayerDetailController {
 			return "error";
 		}
 		
-		PlayerEntity player=playerService.selectById();
+		//PlayerEntity player=playerService.selectById();
 		
 		return "result";
 	}
