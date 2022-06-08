@@ -29,8 +29,9 @@ public class TopicService {
 	
 	public List<TopicEntity> getLimit3Topic() {
 		List<TopicEntity> topicList = new ArrayList<TopicEntity>();
-		for(TopicEntity topicId : supportMesseageRepositoty.selectByTopicId()) {
-			topicList.add(topicId);
+		for(Integer topicId : supportMesseageRepositoty.selectByTopicId()) {
+			TopicEntity topic = getTopic(topicId);
+			topicList.add(topic);
 		}
 		return topicList;
 	}

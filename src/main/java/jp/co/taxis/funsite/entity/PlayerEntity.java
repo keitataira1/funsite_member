@@ -24,7 +24,7 @@ public class PlayerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Integer id;
+	private String id;
 	
 	@Column(name = "name")
 	private String name;
