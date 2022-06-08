@@ -14,7 +14,6 @@ import jp.co.taxis.funsite.service.PlayerService;
 import jp.co.taxis.funsite.service.TopicService;
 
 @Controller
-@RequestMapping("index")
 public class PlayerListController {
 	
 	@Autowired
@@ -29,7 +28,7 @@ public class PlayerListController {
 	 * @param model モデル
 	 * @return View
 	 */
-	@RequestMapping(value = "index", method = { RequestMethod.GET})
+	@RequestMapping(value = "list", method = { RequestMethod.GET})
 	public String index(Model model) {
 		
 		List<TopicEntity> topicList = topicService.getLimit3Topic();
