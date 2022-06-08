@@ -43,7 +43,7 @@
         <img id="main_visual" onclick="return change_img();" src="img/main_visual1.png" />
     </header>
     <main>
-        <table th:if="${!lists.isEmpty(topicList)}" style="text-align: center;">
+        <table style="text-align: center;">
             <tr>
                 <th>順位</th>
                 <th>TOPIC</th>
@@ -53,7 +53,7 @@
                 <td th:text="${topic.topic}"></td>
             </tr>
         </table>
-        <ul th:if="${!lists.isEmpty(playerList)">
+        <ul>
             <li th:each="player : ${playerList}">
                 <div>
                     <a href="player/detail.html">
