@@ -10,7 +10,7 @@ import jp.co.taxis.funsite.entity.MemberEntity;
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
 
-	@Query("SELECT m FROM MemberEntity m WHERE m.mailAddress = :mailaddress AND m.password = :password AND m.invalidFlg = 0")
+	@Query(nativeQuery = true, value = "SELECT * FROM MemberEntity m WHERE m.mailAddress = :mailaddress AND m.password = :password AND m.invalidFlg = 0")
 	public MemberEntity selectByMailAddlessAndPassword(@Param("mailaddress") String mailaddress,
 			@Param("password") String password);
 

@@ -27,4 +27,10 @@ public class PlayerService {
 		System.out.println(player);
 	}
 
+	/** 部分検索(名前) */
+	public List<PlayerEntity> selectLikeName(String searchName) {
+		List<PlayerEntity> playerList = playerRepository.playerSearch(searchName);
+		return playerList;
+	}
+
 }
