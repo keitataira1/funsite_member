@@ -34,6 +34,7 @@ public class PlayerListController {
 		
 		List<TopicEntity> topicList = topicService.getLimit3Topic();
 		model.addAttribute("topicList", topicList);
+		
 		List<PlayerEntity> playerList = playerService.selectAll();
 		model.addAttribute("playerList", playerList);
 		

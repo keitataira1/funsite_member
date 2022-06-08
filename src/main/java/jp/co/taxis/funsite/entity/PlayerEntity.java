@@ -24,7 +24,7 @@ public class PlayerEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private String id;
+	private Integer id;
 	
 	@Column(name = "name")
 	private String name;
@@ -43,5 +43,5 @@ public class PlayerEntity {
 	
 	@Column(name = "version")
 	@Version
-	private String version;
+	private Integer version;
 }

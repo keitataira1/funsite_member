@@ -43,104 +43,24 @@
         <img id="main_visual" onclick="return change_img();" src="img/main_visual1.png" />
     </header>
     <main>
-        <table style="text-align: center;">
+        <table th:if="${!lists.isEmpty(topicList)}" style="text-align: center;">
             <tr>
                 <th>順位</th>
                 <th>TOPIC</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>○○選手大好きな人集まれー！</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>ガイナーレの心臓！○○を語ろう。</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>これまでのXXXのプレーで、一番しべれるやつ</td>
+            <tr th:each="topic, : ${topicList}">
+                <td >1</td>
+                <td th:text="${topic.topic}"></td>
             </tr>
         </table>
-        <ul>
-            <li>
+        <ul th:if="${!lists.isEmpty(playerList)">
+            <li th:each="player : ${playerList}">
                 <div>
                     <a href="player/detail.html">
-                        <img src="img/player1.png" />
+                        <img src="${player.img}" />
                     </a>
                 </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player2.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player3.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player4.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player1.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player2.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player3.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
-            </li>
-            <li>
-                <div>
-                    <a href="player/detail.html">
-                        <img src="img/player4.png" />
-                    </a>
-                </div>
-                <div>
-                    ○○選手
-                </div>
+                <div th:text="${player.name}">選手</div>
             </li>
             <li class="clear">
             </li>

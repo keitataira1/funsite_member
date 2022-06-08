@@ -25,16 +25,16 @@ public class TopicEntity {
 	private Integer id;
 	
 	@Column(name = "player_id")
-	private String playerId;
+	private Integer playerId;
 	
 	@Column(name = "topic")
 	private String topic;
 	
 	@Column(name = "invalid_flg")
-	private boolean invalidFig;
+	private Boolean invalidFig;
 	
 	@Column(name = "version")
 	@Version
-	private int version;
+	private Integer version;
 	
 }

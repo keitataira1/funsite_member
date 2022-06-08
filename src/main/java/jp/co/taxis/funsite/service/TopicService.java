@@ -29,7 +29,7 @@ public class TopicService {
 	
 	public List<TopicEntity> getLimit3Topic() {
 		List<TopicEntity> topicList = new ArrayList<TopicEntity>();
-		for(Integer topicId : supportMesseageRepositoty.selectByTopicId()) {
+		for(Integer topicId : supportMesseageRepositoty.selectTop3()) {
 			TopicEntity topic = getTopic(topicId);
 			topicList.add(topic);
 		}

@@ -23,13 +23,13 @@ public class SupportMessageEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private String id;
+	private Integer id;
 	
 	@Column(name = "topic_id")
-	private String topicId;
+	private Integer topicId;
 	
 	@Column(name = "member_id")
-	private String memberId;
+	private Integer memberId;
 	
 	@Column(name = "send_datetime")
 	private LocalDate sendDatetime;
