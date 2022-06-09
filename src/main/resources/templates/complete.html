@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>会員登録完了</title>
+    <link rel="stylesheet" href="../css/common.css" />
+    <script src="js/index.js"></script>
+</head>
+
+<body>
+    <nav>
+        <ul>
+
+             <li>
+                トップ
+            </li>
+            <li>
+                <a href="player/search">選手検索</a>
+            </li>
+            <li>
+                <a href="message/list">応援メッセージ</a>
+            </li>
+            <li>
+                <a href="user/input">入会</a>
+            </li>
+            <li>
+                <a href="user/login">ログイン</a>
+            </li>
+			<th:block th:if="${@userDto.memberEntity != null}">
+	            <li>
+	                <span th:text="${@userDto.memberEntity.displayName}"></span>
+	            </li>
+			</th:block>
+			<th:block th:if="${@userDto.memberEntity == null}">
+	            <li>
+	                ゲスト
+	            </li>
+			</th:block>
+            <li class="clear">
+            </li>
+        </ul>
+    </nav>
+    <main>
+        <form action="complete.html">
+           <div style="width:100%;"></div>
+            <div>
+                〇〇〇さんの会員登録が終了しました。
+            </div>
+        </form>
+    </main>
+</body>
+
+</html>

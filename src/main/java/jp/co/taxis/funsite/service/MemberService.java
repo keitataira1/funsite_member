@@ -23,14 +23,21 @@ public class MemberService {
 		return memberList;
 	}
 
-	public MemberEntity insert(MemberEntity member) {//入力されたメアドと会員名がDBにすでに存在する場合エラー
-		
-		MemberEntity returnntity = memberRepository.selectByMailAddlessAndName(member.getMailAddress(),
-				member.getName());
+	public MemberEntity insert(MemberEntity member) {// 入力されたメアドと会員名がDBにすでに存在する場合エラー
 
-		if (returnntity != null)
-			throw new ApplicationException("login.error");
+		MemberEntity returnMailAddress = memberRepository.selectByMailAddless(member.getMailAddress());
+
+		if (returnMailAddress != null) {
+			throw new ApplicationException("register_mail.error");
+		}	
 		
+		MemberEntity returnName = memberRepository.selectByName(member.getName());
+		
+		if(returnName != null) {
+			throw new ApplicationException("register_name.error");
+			
+		}
+
 		MemberEntity resultMember = memberRepository.save(member);
 		return resultMember;
 	}

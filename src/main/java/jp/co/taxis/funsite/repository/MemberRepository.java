@@ -14,8 +14,10 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
 	public MemberEntity selectByMailAddlessAndPassword(@Param("mailaddress") String mailaddress,
 			@Param("password") String password);
 
-	@Query("SELECT m FROM MemberEntity m WHERE m.mailAddress = :mailaddress AND m.name = :name AND m.invalidFlg = 0")
-	public MemberEntity selectByMailAddlessAndName(@Param("mailaddress") String mailaddress,
-			@Param("name") String name);
+	@Query("SELECT m FROM MemberEntity m WHERE m.mailAddress = :mailaddress ")
+	public MemberEntity selectByMailAddless(@Param("mailaddress") String mailaddress);
+
+	@Query("SELECT m FROM MemberEntity m WHERE m.name = :name ")
+	public MemberEntity selectByName(@Param("name") String name);
 
 }
