@@ -12,7 +12,7 @@ import jp.co.taxis.funsite.entity.PlayerEntity;
 @Repository
 public interface PlayerRepository extends JpaRepository<PlayerEntity, Integer> {
 
-	@Query(nativeQuery = true, value = "SELECT * FROM player WHERE name LIKE:name")
+	@Query("SELECT p FROM PlayerEntity p WHERE p.name LIKE:name")
 	public List<PlayerEntity> playerSearch(@Param("name") String name);
 
 }

@@ -23,9 +23,9 @@ public class PlayerSearchController {
 
 	/** 検索→表示の画面表示 */
 	@RequestMapping(value = "search", method = { RequestMethod.GET })
-	public String searchDisplay(@ModelAttribute("player") Model model, @RequestParam(name = "name") String name) {
+	public String searchDisplay(@ModelAttribute("player") Model model, @RequestParam(name = "name") PlayerEntity player) {
 
-		List<PlayerEntity> playerList = playerService.selectLikeName("%" + name + "%");
+		List<PlayerEntity> playerList = playerService.selectLikeName(player.getName());
 		model.addAttribute("playerList", playerList);
 
 		return "player/player_search";
