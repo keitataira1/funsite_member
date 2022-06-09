@@ -21,7 +21,7 @@ public class PlayerService {
 		List<PlayerEntity> playerList = playerRepository.findAll();
 		return playerList;
 	}
-
+	/** 選手詳細情報1件取得 */
 	public void selectById(Integer id) {
 		PlayerEntity player = playerRepository.findById(id).orElse(null);
 		System.out.println(player);
