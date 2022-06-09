@@ -25,22 +25,25 @@ public class PlayerEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "birthday")
 	private LocalDate birthday;
-	
+
+	@Column(name = "constellation")
+	private String constellation;
+
 	@Column(name = "position")
 	private String position;
-	
+
 	@Column(name = "comment")
 	private String comment;
-	
+
 	@Column(name = "image")
 	private String image;
-	
+
 	@Column(name = "version")
 	@Version
 	private Integer version;
