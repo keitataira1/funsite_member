@@ -31,7 +31,8 @@ public class PlayerDetailController {
 	public String detail(@ModelAttribute("detail") @Validated PlayerForm playerForm, Model model) {
 
 		// 選手情報・トピック情報を取得する
-		PlayerEntity player = playerService.selectById("id");
+		PlayerEntity player =new PlayerEntity();
+		playerService.selectById(player.getId());
 
 		// 出力
 		model.addAttribute("player", player);

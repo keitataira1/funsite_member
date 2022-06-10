@@ -23,8 +23,7 @@ public class PlayerService {
 	}
 
 	/** 選手詳細情報1件取得 */
-	public PlayerEntity selectById(String id) {
-		String str = String.valueOf(id);
+	public PlayerEntity selectById(Integer id) {
 		PlayerEntity player = playerRepository.findById(id).orElse(null);
 		System.out.println(player);
 		return player;
