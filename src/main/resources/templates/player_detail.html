@@ -16,9 +16,21 @@
 				<li><a href="search.html">選手検索</a></li>
 				<li><a href="../message/list.html">応援メッセージ</a></li>
 				<li><a href="../user/input.html">入会</a></li>
-				<li><a href="../user/login.html">ログイン</a></li>
-				<li>○○さん</li>
-				<li class="clear"></li>
+				 <li>
+                <a href="user/login">ログイン</a>
+            </li>
+			<th:block th:if="${@userDto.memberEntity != null}">
+	            <li>
+	                <span th:text="${@userDto.memberEntity.displayName}"></span>
+	            </li>
+			</th:block>
+			<th:block th:if="${@userDto.memberEntity == null}">
+	            <li>
+	                ゲスト
+	            </li>
+			</th:block>
+            <li class="clear">
+            </li>
 			</ul>
 		</nav>
 		<main>

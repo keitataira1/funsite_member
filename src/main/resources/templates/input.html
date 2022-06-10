@@ -13,7 +13,7 @@
         <ul>
 
             <li>
-                <a href="../index.html">トップ</a>
+                <a href="../index">トップ</a>
             </li>
             <li>
                 <a href="../player/search.html">選手検索</a>
@@ -24,12 +24,19 @@
             <li>
                 入会
             </li>
-            <li>
-                <a href="login.html">ログイン</a>
+             <li>
+                <a href="user/login">ログイン</a>
             </li>
-            <li>
-                ○○さん
-            </li>
+			<th:block th:if="${@userDto.memberEntity != null}">
+	            <li>
+	                <span th:text="${@userDto.memberEntity.displayName}"></span>
+	            </li>
+			</th:block>
+			<th:block th:if="${@userDto.memberEntity == null}">
+	            <li>
+	                ゲスト
+	            </li>
+			</th:block>
             <li class="clear">
             </li>
         </ul>
