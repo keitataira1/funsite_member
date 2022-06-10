@@ -8,38 +8,31 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import jp.co.taxis.funsite.entity.TopicEntity;
-import jp.co.taxis.funsite.repository.MemberRepository;
-import jp.co.taxis.funsite.repository.SupportMessageRepository;
-import jp.co.taxis.funsite.repository.TopicRepository;
+import jp.co.taxis.funsite.service.MemberService;
+import jp.co.taxis.funsite.service.SupportMessageService;
+import jp.co.taxis.funsite.service.TopicService;
 
 @Controller
 @RequestMapping("message")
 public class SendMessageController {
 	
 	@Autowired
-	private MemberRepository memberRepository;
+	private MemberService memberService;
 	
 	@Autowired
-	private SupportMessageRepository supportMesseageRepository;
+	private SupportMessageService supportMessageService;
 	
 	@Autowired
-	private TopicRepository topicRepository;
+	private TopicService topicService;
 
 	@GetMapping("send")
 	public String send(@RequestParam("id") int id, Model model) {
 		
-		TopicEntity topic = new TopicEntity();
-		topic = topicRepository.findById(id).orElse(null);
-		model.addAttribute(topic);
-		
-		
-		
 		return "message/send";
 	}
 	
-	@PostMapping("legister")
-	public String legister() {
+	@PostMapping("register")
+	public String register() {
 		return "redirect:send";
 	}
 	
