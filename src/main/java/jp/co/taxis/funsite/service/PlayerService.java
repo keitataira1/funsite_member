@@ -21,10 +21,13 @@ public class PlayerService {
 		List<PlayerEntity> playerList = playerRepository.findAll();
 		return playerList;
 	}
+
 	/** 選手詳細情報1件取得 */
-	public void selectById(Integer id) {
+	public PlayerEntity selectById(String id) {
+		String str = String.valueOf(id);
 		PlayerEntity player = playerRepository.findById(id).orElse(null);
 		System.out.println(player);
+		return player;
 	}
 
 	/** 部分検索(名前) */
