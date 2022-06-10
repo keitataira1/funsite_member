@@ -26,13 +26,14 @@ public class SupportMessageEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Integer id;
-
-	@JoinColumn(name = "topic_id", referencedColumnName = "topic")
-	private Integer topicId;
+	
+	@ManyToOne
+	@JoinColumn(name = "topic_id", referencedColumnName = "id")
+	private TopicEntity topic;
 
 	@ManyToOne
-	@JoinColumn(name = "member_id", referencedColumnName = "display_name")
-	private Integer memberId;
+	@JoinColumn(name = "member_id", referencedColumnName = "id")
+	private MemberEntity member;
 
 	@Column(name = "send_datetime")
 	private LocalDate sendDatetime;
