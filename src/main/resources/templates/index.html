@@ -48,8 +48,8 @@
                 <th>順位</th>
                 <th>TOPIC</th>
             </tr>
-            <tr th:each="topic : ${topicList}">
-                <td >1</td>
+            <tr th:each="topic,count : ${topicList}">
+                <td th:text="${count}"></td>
                 <td th:text="${topic.topic}"></td>
             </tr>
         </table>

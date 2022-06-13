@@ -41,5 +41,10 @@ public class MemberService {
 		MemberEntity resultMember = memberRepository.save(member);
 		return resultMember;
 	}
+	
+	public MemberEntity selectById(int id) {
+		MemberEntity member = memberRepository.findById(id).orElse(null);
+		return member;
+	}
 
 }

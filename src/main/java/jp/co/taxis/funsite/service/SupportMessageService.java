@@ -26,5 +26,16 @@ public class SupportMessageService {
 		SupportMessageEntity result = supportMessageRepository.save(supportMessage);
 		return result;
 	}
+	
+	public List<SupportMessageEntity> MessageByTopicId(int id){
+		List<SupportMessageEntity> messageList = supportMessageRepository.selectTopicMessage(id);
+		return messageList;
+	}
+	
+	public SupportMessageEntity insert(SupportMessageEntity message) {
+		supportMessageRepository.save(message);
+		return message;
+		
+	}
 
 }
