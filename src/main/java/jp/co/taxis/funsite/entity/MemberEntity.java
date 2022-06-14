@@ -48,7 +48,7 @@ public class MemberEntity {
 	private String address;
 
 	@Column(name = "invalid_flg")
-	private Boolean invalidFlg;
+	private boolean invalidFlg;
 
 	@Column(name = "version")
 	@Version
