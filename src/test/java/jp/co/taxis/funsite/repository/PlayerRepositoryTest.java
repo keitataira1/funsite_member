@@ -14,7 +14,6 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.jdbc.Sql;
 
 import jp.co.taxis.funsite.entity.PlayerEntity;
-import jp.co.taxis.funsite.repository.PlayerRepository;
 
 @SpringBootTest
 public class PlayerRepositoryTest {
@@ -25,11 +24,13 @@ public class PlayerRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM player" })
+	@Sql(statements = { "DELETE FROM player", "INSERT INTO player VALUES (1,'山田太郎',null,'キーパー','頑張ります',null,1)",
+			"INSERT INTO player VALUES (2,'佐藤一郎',null,'フォワード','ありがとうございます','顔写真',1)",
+			"INSERT INTO player VALUES (3,'田中次郎',null,'ディフェンダー','こんにちは','顔写真',1)" })
 	public void testPlayerSearch_001_0件() {
 
 		// テスト対象メソッド実行
-		List<PlayerEntity> actualList = playerRepository.playerSearch("");
+		List<PlayerEntity> actualList = playerRepository.playerSearch("%原%");
 
 		// 期待値
 		List<PlayerEntity> expected = new ArrayList<PlayerEntity>();
@@ -41,7 +42,7 @@ public class PlayerRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM player", "INSERT INTO player VALUES (001,'山田太郎',2000-02-23,'キーパー','頑張ります','顔写真',1)"
+	@Sql(statements = { "DELETE FROM player", "INSERT INTO player VALUES (1,'山田太郎',null,'キーパー','頑張ります','顔写真',1)"
 
 	})
 	public void testPlayerSearch_002_1件() {
@@ -51,7 +52,7 @@ public class PlayerRepositoryTest {
 
 		// 期待値
 		List<PlayerEntity> expected = new ArrayList<PlayerEntity>();
-		//expected.add(new PlayerEntity(001, "山田太郎", null, "キーパー", "頑張ります", "顔写真", 1));// 星座エラー
+		expected.add(new PlayerEntity(1, "山田太郎", null, "キーパー", "頑張ります", "顔写真", 1));
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -60,10 +61,9 @@ public class PlayerRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM player",
-			"INSERT INTO player VALUES (001,'山田太郎',2000-02-23,'キーパー','頑張ります','顔写真',1)",
-			"INSERT INTO player VALUES (002,'佐藤一郎',2022-06-14,'フォワード','ありがとうございます','顔写真',1)",
-			"INSERT INTO player VALUES (003,'田中次郎',2022-06-14,'ディフェンダー','こんにちは','顔写真',2)"
+	@Sql(statements = { "DELETE FROM player", "INSERT INTO player VALUES (1,'山田太郎',null,'キーパー','頑張ります','顔写真',1)",
+			"INSERT INTO player VALUES (2,'佐藤一郎',null,'フォワード','ありがとうございます','顔写真',1)",
+			"INSERT INTO player VALUES (3,'田中次郎',null,'ディフェンダー','こんにちは','顔写真',1)"
 
 	})
 	public void testPlayerSearch_003_複数件() {
@@ -73,9 +73,9 @@ public class PlayerRepositoryTest {
 
 		// 期待値
 		List<PlayerEntity> expected = new ArrayList<PlayerEntity>();
-		//expected.add(new PlayerEntity(001, "山田太郎", null, "キーパー", "頑張ります", "顔写真", 1));
-		//expected.add(new PlayerEntity(002, "佐藤一郎", null, "フォワード", "ありがとうございます", "顔写真", 1));
-		//expected.add(new PlayerEntity(003, "田中次郎", null, "ディフェンダー", "こんにちは", "顔写真", 2));
+		expected.add(new PlayerEntity(1, "山田太郎", null, "キーパー", "頑張ります", "顔写真", 1));
+		expected.add(new PlayerEntity(2, "佐藤一郎", null, "フォワード", "ありがとうございます", "顔写真", 1));
+		expected.add(new PlayerEntity(3, "田中次郎", null, "ディフェンダー", "こんにちは", "顔写真", 1));
 
 		// 検証
 		assertIterableEquals(expected, actualList);

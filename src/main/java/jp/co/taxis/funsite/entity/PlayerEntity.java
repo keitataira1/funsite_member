@@ -32,9 +32,6 @@ public class PlayerEntity {
 	@Column(name = "birthday")
 	private LocalDate birthday;
 
-	@Column(name = "constellation")
-	private String constellation;
-
 	@Column(name = "position")
 	private String position;
 
