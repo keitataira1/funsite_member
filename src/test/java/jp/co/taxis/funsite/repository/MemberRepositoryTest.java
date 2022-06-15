@@ -2,8 +2,6 @@ package jp.co.taxis.funsite.repository;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.time.LocalDate;
-
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
@@ -24,7 +22,8 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
+	@Sql(statements = { 
+			"DELETE FROM member",
 			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" })
 	public void testSelectByMailAddlessAndPassword_001_0件() {
 
@@ -41,18 +40,18 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
-			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',2022-06-14,'1','東京都',true,1)",
-			"INSERT INTO member VALUES (2,'b@gmail.com','apple','佐藤一郎','佐藤',2022-06-14,2,'兵庫県',false,2)"
+	@Sql(statements = {
+			"DELETE FROM member",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)",
+			"INSERT INTO member VALUES (2,'b@gmail.com','apple','佐藤一郎','佐藤',null,'2','兵庫県',true,1)"
 			})
 	public void testSelectByMailAddlessAndPassword_002_1件() {
 
 		// テスト対象メソッド実行
-		MemberEntity actual = memberRepository.selectByMailAddlessAndPassword("%a@gmail.com%", "%abc%");
+		MemberEntity actual = memberRepository.selectByMailAddlessAndPassword("b@gmail.com", "apple");
 
 		// 期待値
-		MemberEntity expected = new MemberEntity();
-		expected.equals(new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", LocalDate.now(), "1", "東京都", true, 1));
+		MemberEntity expected = new MemberEntity(2,"b@gmail.com","apple","佐藤一郎","佐藤",null,"2","兵庫県",true,1);
 
 		// 検証
 		assertEquals(expected, actual);
@@ -62,15 +61,17 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
-			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" })
+	@Sql(statements = { 
+			"DELETE FROM member",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)"
+			})
 	public void testSelectByMailAddless_003_0件() {
 
 		// テスト対象メソッド実行
 		MemberEntity actual = memberRepository.selectByMailAddless("%なし%");
 
 		// 期待値
-		MemberEntity expected = new MemberEntity();
+		MemberEntity expected =null;
 
 		// 検証
 		assertEquals(expected, actual);
@@ -79,16 +80,18 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
-			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" })
+	@Sql(statements = {
+			"DELETE FROM member",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)",
+			"INSERT INTO member VALUES (2,'b@gmail.com','apple','佐藤一郎','佐藤',null,'2','兵庫県',false,2)"
+			})
 	public void testSelectByMailAddless_004_1件() {
 
 		// テスト対象メソッド実行
 		MemberEntity actual = memberRepository.selectByMailAddless("a@gmail.com");
 
 		// 期待値
-		MemberEntity expected = new MemberEntity();
-		expected.equals(new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", null, "1", "東京都", true, 1));
+		MemberEntity expected = new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", null, "1", "東京都", true, 1);
 
 		// 検証
 		assertEquals(expected, actual);
@@ -98,15 +101,17 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
-			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" })
+	@Sql(statements = { 
+			"DELETE FROM member",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" 
+			})
 	public void testSelectByName_005_0件() {
 
 		// テスト対象メソッド実行
-		MemberEntity actual = memberRepository.selectByName("");
+		MemberEntity actual = memberRepository.selectByName("%なし%");
 
 		// 期待値
-		MemberEntity expected = new MemberEntity();
+		MemberEntity expected =null;
 
 		// 検証
 		assertEquals(expected, actual);
@@ -115,17 +120,19 @@ public class MemberRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM member",
-			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)" })
+	@Sql(statements = { 
+			"DELETE FROM member",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)",
+			"INSERT INTO member VALUES (2,'b@gmail.com','apple','佐藤一郎','佐藤',null,'2','兵庫県',false,2)"
+			})
 	public void testSelectByName_006_1件() {
 
 		// テスト対象メソッド実行
-		MemberEntity actual = memberRepository.selectByName("山田");
+		MemberEntity actual = memberRepository.selectByName("山田太郎");
 
 		// 期待値
-		MemberEntity expected = new MemberEntity();
-		expected.equals(new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", null, "1", "東京都", true, 1));
-
+		MemberEntity expected = new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", null, "1", "東京都", true, 1);
+		
 		// 検証
 		assertEquals(expected, actual);
 	}
