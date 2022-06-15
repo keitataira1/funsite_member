@@ -27,7 +27,7 @@ public class PlayerDetailController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "player", method = { RequestMethod.POST })
+	@RequestMapping(value = "detail", method = { RequestMethod.POST })
 	public String detail(@ModelAttribute("detail") @Validated PlayerForm playerForm, Model model) {
 
 		// 選手情報・トピック情報を取得する
@@ -38,7 +38,7 @@ public class PlayerDetailController {
 		model.addAttribute("player", player);
 		
 		//Viewの選択
-		return "player_detail";
+		return "player/detail";
 	}
 
 }
