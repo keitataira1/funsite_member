@@ -17,7 +17,6 @@ import org.springframework.test.context.jdbc.Sql;
 import jp.co.taxis.funsite.entity.MemberEntity;
 import jp.co.taxis.funsite.entity.SupportMessageEntity;
 import jp.co.taxis.funsite.entity.TopicEntity;
-import jp.co.taxis.funsite.repository.SupportMessageRepository;
 
 @SpringBootTest
 public class SupportMessageRepositoryTest {
@@ -37,7 +36,7 @@ public class SupportMessageRepositoryTest {
 		List<SupportMessageEntity> actualList = supportMessageRepository.selectByMessage();
 
 		// 期待値
-		List<SupportMessageEntity> expected = new ArrayList<SupportMessageEntity>();
+		List<SupportMessageEntity> expected = null;
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -58,7 +57,7 @@ public class SupportMessageRepositoryTest {
 
 		// 期待値
 		List<SupportMessageEntity> expected = new ArrayList<SupportMessageEntity>();
-		expected.add(new SupportMessageEntity(1, topic, member, LocalDate.now(), "お疲れ様です"));
+		expected.add(new SupportMessageEntity(1, topic, member, null, "お疲れ様です"));
 
 		// 検証
 		assertIterableEquals(expected, actualList);
