@@ -34,7 +34,7 @@ public class JoinMemberController {
 	 */
 	@RequestMapping(value = "input", method = { RequestMethod.GET, RequestMethod.POST })
 	public String input(@ModelAttribute("user") MemberForm memberForm) {
-		return "input";
+		return "/input";
 	}
 
 	/**
