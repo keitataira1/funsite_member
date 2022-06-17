@@ -48,7 +48,7 @@ public class JoinMemberController {
 	public String confirm(@ModelAttribute("user") @Validated MemberForm memberForm, BindingResult result, Model model) {
 
 		if (result.hasErrors()) {
-			return "input";
+			return "/input";
 		}
 
 		MemberEntity memberEntity = new MemberEntity();
@@ -61,10 +61,10 @@ public class JoinMemberController {
 			String messageKey = e.getMessage();
 			String message = messageSource.getMessage(messageKey, null, Locale.getDefault());
 			model.addAttribute("message", message);
-			return "input";
+			return "/input";
 		}
 
-		return "confirm";
+		return "/confirm";
 	}
 
 	/**
