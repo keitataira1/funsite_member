@@ -15,7 +15,7 @@ public interface SupportMessageRepository extends JpaRepository<SupportMessageEn
 	@Query(nativeQuery=true,value="SELECT * FROM support_message WHERE support_message ORDER BY send_datetime DESC LIMIT 10")
 	public List<SupportMessageEntity> selectByMessage();
 
-	@Query(nativeQuery = true, value = "SELECT topic_id FROM support_message GROUP BY topic_id ORDER BY COUNT( topic_id ) limit 3")
+	@Query(nativeQuery = true, value = "SELECT topic_id FROM support_message GROUP BY topic_id ORDER BY COUNT( topic_id ) DESC limit 3")
 	public List<Integer> selectTop3();
 	
 	@Query(nativeQuery = true, value = "SELECT * FROM support_message WHERE topic_id = :id ORDER BY send_datetime DESC")
