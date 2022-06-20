@@ -95,19 +95,15 @@
 
                 </tr>
                 
-                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-
             </table>
-            <div>
-            <input type="hidden" th:field="*{mail}"/>
-            <input type="hidden" th:field="*{password}"/>
-            <input type="hidden" th:field="*{realName}"/>
-            <input type="hidden" th:field="*{memberName}"/>
-            <input type="hidden" th:field="*{birthday}"/>
-            <input type="hidden" th:field="*{postalCode}"/>
-            <input type="hidden" th:field="*{address}"/>
+            <span th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></span>
+            <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            <span th:if="${#fields.hasErrors('realName')}" th:errors="*{realName}"></span>
+            <span th:if="${#fields.hasErrors('memberName')}" th:errors="*{memberName}"></span>
+            <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
+            <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+            <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
             <input type="submit" value="確認" />
-            </div>
         </form>
      </main>  
 </body>

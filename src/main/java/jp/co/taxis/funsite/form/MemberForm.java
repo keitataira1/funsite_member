@@ -32,8 +32,8 @@ public class MemberForm {
 	@NotEmpty
 	@Pattern(regexp = ".{1,10}")
 	private String memberName;
-
-	@DateTimeFormat(pattern = "yyyy/MM/dd")
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private LocalDate birthday;
 
 	@Size(max = 10)
