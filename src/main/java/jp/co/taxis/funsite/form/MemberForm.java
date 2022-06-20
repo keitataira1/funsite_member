@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -35,10 +36,10 @@ public class MemberForm {
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate birthday;
 
-	@Pattern(regexp = ".{1,10}")
-	private Integer postalCode;
+	@Size(max = 10)
+	private String postalCode;
 
-	@Pattern(regexp = ".{1,50}")
+	@Size(max = 50)
 	private String address;
 
 }

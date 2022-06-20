@@ -32,9 +32,9 @@ public class JoinMemberController {
 	 * @param memberForm
 	 * @return
 	 */
-	@RequestMapping(value = "input", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "input", method = { RequestMethod.GET })
 	public String input(@ModelAttribute("user") MemberForm memberForm) {
-		return "/input";
+		return "input";
 	}
 
 	/**
@@ -45,26 +45,13 @@ public class JoinMemberController {
 	 * @return
 	 */
 	@RequestMapping(value = "confirm", method = { RequestMethod.POST })
-	public String confirm(@ModelAttribute("user") @Validated MemberForm memberForm, BindingResult result, Model model) {
+	public String confirm(@ModelAttribute("user") @Validated MemberForm memberForm, BindingResult result) {
 
 		if (result.hasErrors()) {
 			return "/input";
 		}
 
-		MemberEntity memberEntity = new MemberEntity();
-		memberEntity.setMailAddress(memberForm.getMail());
-		memberEntity.setName(memberForm.getMemberName());
-
-		try {
-			memberEntity = memberService.insert(memberEntity);
-		} catch (ApplicationException e) {
-			String messageKey = e.getMessage();
-			String message = messageSource.getMessage(messageKey, null, Locale.getDefault());
-			model.addAttribute("message", message);
-			return "/input";
-		}
-
-		return "/confirm";
+		return "confirm";
 	}
 
 	/**
@@ -72,9 +59,30 @@ public class JoinMemberController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping(value = "complete", method = { RequestMethod.GET })
-	public String complete() {
-		return "complete";
+	@RequestMapping(value = "complete", method = { RequestMethod.POST })
+	public String complete(@ModelAttribute("user") @Validated MemberForm memberForm, BindingResult result, Model model) {
+		
+		MemberEntity memberEntity = new MemberEntity();
+		memberEntity.setMailAddress(memberForm.getMail());
+		memberEntity.setPassword(memberForm.getPassword());
+		memberEntity.setName(memberForm.getRealName());
+		memberEntity.setDisplayName(memberForm.getMemberName());
+		memberEntity.setBirthday(memberForm.getBirthday());
+		memberEntity.setPostNumber(memberForm.getPostalCode());
+		memberEntity.setAddress(memberForm.getAddress());
+		memberEntity.setInvalidFlg(true);
+		memberEntity.setVersion(1);
+
+		try {
+			memberService.insert(memberEntity);
+		} catch (ApplicationException e) {
+			String messageKey = e.getMessage();
+			String message = messageSource.getMessage(messageKey, null, Locale.getDefault());
+			model.addAttribute("message", message);
+			return "/input";
+		}
+		
+		return "/complete";
 	}
 
 }

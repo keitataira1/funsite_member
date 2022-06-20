@@ -25,7 +25,7 @@
                 入会
             </li>
              <li>
-                <a href="user/login">ログイン</a>
+                <a href="../user/login">ログイン</a>
             </li>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
@@ -97,7 +97,14 @@
 
             </table>
             <div>
-                <input type="submit" value="確認" />
+            <input type="hidden" th:field="*{mail}"/>
+            <input type="hidden" th:field="*{password}"/>
+            <input type="hidden" th:field="*{realName}"/>
+            <input type="hidden" th:field="*{memberName}"/>
+            <input type="hidden" th:field="*{birthday}"/>
+            <input type="hidden" th:field="*{postalCode}"/>
+            <input type="hidden" th:field="*{address}"/>
+            <input type="submit" value="確認" />
             </div>
         </form>
      </main>  

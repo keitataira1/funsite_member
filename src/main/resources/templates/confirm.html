@@ -10,67 +10,66 @@
 
 <body>
     <main>
-        <form th:action="@{/user/complete}" method="post" th:object="${member}">
+        <form th:action="@{/user/complete}" method="post" th:object="${user}">
          <div style="width:100%;">
             <table>
                 <tr>
                     <td>
                         メールアドレス*
                     </td>
-                    <td th:text-align:left="*{mail}"></td>
+                    <td th:text="*{mail}" style="text-align: left;"></td>
 
                 </tr>
                 <tr>
                     <td>
                         パスワード*
                     </td>
-                    <td th:text-align:left="*{password}"></td>
+                    <td th:text="*{password}" style="text-align: left;"></td>
 
                 </tr>
                 <tr>
                     <td>
                         氏名*
                     </td>
-                    <td th:text-align:left="*{realName}"></td>
+                    <td th:text="*{realName}" style="text-align: left;"></td>
                 </tr>
                 <tr>
                     <td>
                         会員名*
                     </td>
-                    <td th:text-align:left="*{mamberName}"></td>
+                    <td th:text="*{memberName}" style="text-align: left;"></td>
                 </tr>
                 <tr>
                     <td>
                         生年月日
                     </td>
-                    <td th:text-align:left="*{birthday}"></td>
+                    <td th:text="*{birthday}" style="text-align: left;"></td>
                 </tr>
                 <tr>
                     <td>
                         郵便番号
                     </td>
-                    <td th:text-align:left="*{postalCode}"></td>
+                    <td th:text="*{postalCode}" style="text-align: left;"></td>
 
                 </tr>
                 <tr>
                     <td>
                         住所
                     </td>
-                    <td th:text-align:left="*{address}"></td>
+                    <td th:text="*{address}" style="text-align: left;"></td>
                 </tr>
 
             </table>
-            <input type="hidden" th:field="*{mail_address}"/>
+			<input type="hidden" th:field="*{mail}"/>
             <input type="hidden" th:field="*{password}"/>
-            <input type="hidden" th:field="*{name}"/>
-            <input type="hidden" th:field="*{display_name}"/>
+            <input type="hidden" th:field="*{realName}"/>
+            <input type="hidden" th:field="*{memberName}"/>
             <input type="hidden" th:field="*{birthday}"/>
-            <input type="hidden" th:field="*{post_number}"/>
+            <input type="hidden" th:field="*{postalCode}"/>
             <input type="hidden" th:field="*{address}"/>
-
             </div>
             <div>
-                <a href="user/input">キャンセル</a><input type="submit" value="登録" />
+            <a href="user/input">キャンセル</a><input type="submit" value="登録" />
             </div>
        </form>
     </main>
