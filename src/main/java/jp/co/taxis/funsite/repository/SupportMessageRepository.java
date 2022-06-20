@@ -12,7 +12,7 @@ import jp.co.taxis.funsite.entity.SupportMessageEntity;
 @Repository
 public interface SupportMessageRepository extends JpaRepository<SupportMessageEntity, Integer> {
 
-	@Query(nativeQuery=true,value="SELECT * FROM support_message WHERE support_message ORDER BY send_datetime DESC LIMIT 10")
+	@Query(nativeQuery=true,value="SELECT * FROM support_message WHERE message ORDER BY send_datetime DESC LIMIT 10")
 	public List<SupportMessageEntity> selectByMessage();
 
 	@Query(nativeQuery = true, value = "SELECT topic_id FROM support_message GROUP BY topic_id ORDER BY COUNT( topic_id ) DESC limit 3")

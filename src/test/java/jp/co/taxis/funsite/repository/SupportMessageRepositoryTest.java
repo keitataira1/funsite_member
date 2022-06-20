@@ -3,6 +3,7 @@ package jp.co.taxis.funsite.repository;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,13 @@ public class SupportMessageRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM support_message" })
+	@Sql(statements = { 
+			"DELETE FROM support_message",
+			"INSERT INTO support_message VALUES (1,1,1,'2020-06-13 14:00:00','こんにちは')",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)",
+			"INSERT INTO player VALUES (1,'本田',null,'キーパー','頑張ります','顔写真',1)",
+			"INSERT INTO topic VALUES (1,1,'topic',true,1)"
+			})
 
 	public void testSelectByMessage_001_0件() {
 
@@ -36,7 +43,7 @@ public class SupportMessageRepositoryTest {
 		List<SupportMessageEntity> actualList = supportMessageRepository.selectByMessage();
 
 		// 期待値
-		List<SupportMessageEntity> expected = null;
+		List<SupportMessageEntity> expected =new ArrayList<SupportMessageEntity>();
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -45,9 +52,18 @@ public class SupportMessageRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM support_message", "INSERT INTO support_message VALUES (1,1,1,null,'お疲れ様です')" })
+	@Sql(statements = { "DELETE FROM support_message", 
+			"INSERT INTO support_message VALUES (1,1,1,'2000-06-17 15:00:00','お疲れ様です')",
+			"INSERT INTO member VALUES (1,'a@gmail.com','abc','山田太郎','山田',null,'1','東京都',true,1)",
+			"INSERT INTO player VALUES (1,'本田',null,'キーパー','頑張ります','顔写真',1)",
+			"INSERT INTO topic VALUES (1,1,'topic',true,1)"
+			})
 
 	public void testSelectByMessage_002_1件() {
+		
+		String strDate="2000/06/17 15:00:00";
+		DateTimeFormatter df=DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+		LocalDate date=LocalDate.parse(strDate,df);
 
 		MemberEntity member = new MemberEntity(1, null, null, null, null, null, null, null, true, 1);
 		TopicEntity topic = new TopicEntity(1, null, null, true, 1);
@@ -57,7 +73,7 @@ public class SupportMessageRepositoryTest {
 
 		// 期待値
 		List<SupportMessageEntity> expected = new ArrayList<SupportMessageEntity>();
-		expected.add(new SupportMessageEntity(1, topic, member, null, "お疲れ様です"));
+		expected.add(new SupportMessageEntity(1,topic,member,date,"お疲れ様です"));
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -92,7 +108,8 @@ public class SupportMessageRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM support_message" })
+	@Sql(statements = { "DELETE FROM support_message"
+			})
 
 	public void testSelectTop3_004_0件() {
 
@@ -110,7 +127,7 @@ public class SupportMessageRepositoryTest {
 	@Transactional
 	@Rollback
 	@Sql(statements = { "DELETE FROM support_message",
-			"INSERT INTO support_message VALUES (1,1,1,2022-06-14 10:26:23,'お疲れ様です')" })
+			"INSERT INTO support_message VALUES (1,1,1,'2000-06-17 15:00:00','お疲れ様です')" })
 
 	public void testSelectTop3_005_1件() {
 
@@ -122,7 +139,7 @@ public class SupportMessageRepositoryTest {
 
 		// 期待値
 		List<Integer> expected = new ArrayList<Integer>();
-		//expected.add(new SupportMessageEntity(1, topic, member, LocalDate.now(), "お疲れ様です"));// add?
+		expected.equals(new SupportMessageEntity(1, topic, member, LocalDate.now(), "お疲れ様です"));// add?
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -145,9 +162,9 @@ public class SupportMessageRepositoryTest {
 
 		// 期待値
 		List<Integer> expected = new ArrayList<Integer>();
-		//expected.add(new SupportMessageEntity(1, topic, member, null, "お疲れ様です"));
-		//expected.add(new SupportMessageEntity(2, topic, member, null, "ありがとうございます"));
-		//expected.add(new SupportMessageEntity(3, topic, member, null, "こんにちは"));
+		expected.equals(new SupportMessageEntity(1, topic, member, null, "お疲れ様です"));
+		expected.equals(new SupportMessageEntity(2, topic, member, null, "ありがとうございます"));
+	    expected.equals(new SupportMessageEntity(3, topic, member, null, "こんにちは"));
 
 		// 検証
 		assertIterableEquals(expected, actualList);
@@ -174,7 +191,7 @@ public class SupportMessageRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM support_message", "INSERT INTO support_message VALUES (1,1,1,null,'お疲れ様です')" })
+	@Sql(statements = { "DELETE FROM support_message", "INSERT INTO support_message VALUES (1,1,1,'2000-06-17 15:00:00','お疲れ様です')" })
 
 	public void testSelectTopicMessage_008_1件() {
 
@@ -195,7 +212,7 @@ public class SupportMessageRepositoryTest {
 	@Test
 	@Transactional
 	@Rollback
-	@Sql(statements = { "DELETE FROM support_message", "INSERT INTO support_message VALUES (1,1,1,null,'お疲れ様です')",
+	@Sql(statements = { "DELETE FROM support_message", "INSERT INTO support_message VALUES (1,1,1,'2000-06-17 15:00:00','お疲れ様です')",
 			"INSERT INTO support_message VALUES (2,2,2,null,'ありがとうございます')",
 			"INSERT INTO support_message VALUES (3,3,3,null,'こんにちは')" })
 
