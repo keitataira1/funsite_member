@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>試合一覧</title>
+<link rel="stylesheet" href="css/common.css" />
+<script src="js/index.js"></script>
+</head>
+<body>
+	<nav>
+		<ul>
+			<li>トップ</li>
+			<li><a href="player/search">選手検索</a></li>
+			<li><a>試合日程</a></li>
+			<li><a href="message/list">応援メッセージ</a></li>
+			<li><a href="item_list">グッズ</a></li>
+			<li><a href="cart">カート</a></li>
+			<li><a href="user/input">入会</a></li>
+			<li><a href="user/login">ログイン</a></li>
+			<li>○○〇さん</li>
+			<li class="clear"></li>
+		</ul>
+	</nav>
+	<main>
+		<div id="message">試合日程一覧</div>
+		<div style="width: 100%;">
+			<table th:if="${!#lists.isEmpty(gameList)}" border="1"> <!-- ←一覧の情報が０件の場合、テーブル自体を表示しない -->
+				<tr th:each="ticket : ${gameList}">
+					<td>6/30</td>
+					<td><a href="ticket_detail">VS○○</a>
+						<p>Aスタジアム</p></td>
+					<td>空席
+						<p>○</p>
+					</td>
+				</tr>
+				<tr th:each="ticket : ${gameList}">
+					<td>
+						<p>7/5</p> <a href="ticket_detail">VS○○</a>
+						<p>Bスタジアム</p>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<ul>
+		</ul>
+	</main>
+</body>
+</html>
