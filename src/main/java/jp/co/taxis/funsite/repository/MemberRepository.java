@@ -17,7 +17,7 @@ public interface MemberRepository extends JpaRepository<MemberEntity, Integer> {
 	@Query("SELECT m FROM MemberEntity m WHERE m.mailAddress = :mailaddress ")
 	public MemberEntity selectByMailAddless(@Param("mailaddress") String mailaddress);
 
-	@Query("SELECT m FROM MemberEntity m WHERE m.name = :name ")
-	public MemberEntity selectByName(@Param("name") String name);
+	@Query("SELECT m FROM MemberEntity m WHERE m.displayName = :name ")
+	public MemberEntity selectByDisplayName(@Param("name") String name);
 
 }

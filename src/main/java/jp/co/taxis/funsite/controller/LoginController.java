@@ -62,7 +62,7 @@ public class LoginController {
 		// 成功したらセッションにメンバーを保持する
 		userDto.setMemberEntity(memberEntity);
 
-		return "/index";
+		return "redirect:../index";
 	}
 
 	@GetMapping("logout")
@@ -71,7 +71,7 @@ public class LoginController {
 		session.invalidate();
 		sessionStatus.setComplete();
 		// 入力画面を表示するためだけのメソッド
-		return "/index";
+		return "redirect:../index";
 	}
 
 }

@@ -1,58 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8" />
-    <title>選手詳細</title>
-    <link rel="stylesheet" href="../css/common.css" />
-    <link rel="stylesheet" href="../css/balloon.css" />
+<meta charset="utf-8" />
+<title>選手詳細</title>
+<link rel="stylesheet" href="../css/common.css" />
+<link rel="stylesheet" href="../css/balloon.css" />
 
 </head>
 
 <body>
-    <main>
-        <form action="@{/message/register}" method="post" th:object="${text}">
+	<main>
+		<form th:action="@{/message/register}" method="post"
+			th:object="${text}">
 
-            <h1 th:text="${topic.topic}}">
-                開始10分のスーパーゴールについてみんなで語ろう!!!
-            </h1>
-            <div th:each="message : ${messageList}" class="line-bc">
-                <!--①LINE会話全体を囲う-->
+			<h1 th:text="${topic.topic}"></h1>
+			<div class="line-bc">
+				<!--①LINE会話全体を囲う-->
+				<div th:each="message : ${messageList}">
+					<!--②左コメント始-->
+					<div th:if="${message.member.id != @userDto.memberEntity.id}"
+						class="balloon6">
+						<div class="faceicon">
+							<img src="../img/icon1.png">
+						</div>
+						<div class="chatting">
+							<div class="says">
+								<p th:text="${message.message}"></p>
+							</div>
+						</div>
+					</div>
+					<!--②/左コメント終-->
 
-                <!--②左コメント始-->
-                <div th:if="${message.member.id != @UserDto.memberEntity.id}" class="balloon6">
-                    <div class="faceicon">
-                        <img src="../img/icon1.png">
-                    </div>
-                    <div class="chatting">
-                        <div class="says">
-                            <p th:text="${message.message}"></p>
-                        </div>
-                    </div>
-                </div>
-                <!--②/左コメント終-->
+					<!--③右コメント始-->
 
-                <!--③右コメント始-->
-
-                <div th:if="${message.member.id == @UserDto.memberEntity.member.id}" class="mycomment">
-                    <p th:text="${message.message}" align="right"></p>
-                </div> 
-                
-            </div>
+					<div th:if="${message.member.id == @userDto.memberEntity.id}"
+						class="mycomment">
+						<p th:text="${message.message}" align="right"></p>
+					</div>
+				</div>
+			</div>
 
 
-            <div>
-                <textarea rows="10" cols="70" placeholder="メッセージを入力" th:field="*{message}"></textarea>
-            </div>
-            
-            <input type="hidden" th:field="*{topicId}"/>
-            <input type="hidden" th:field="*{message}"/>
-            
-            <div>
-                <button type="submit" class="btn">送信</button>
-            </div>
-        </form>
-    </main>
+			<div>
+				<textarea rows="10" cols="70" placeholder="メッセージを入力"
+					th:field="*{message}"></textarea>
+			</div>
+
+			<input type="hidden" th:field="*{topicId}" /> <input type="hidden"
+				th:field="*{message}" />
+
+			<div>
+				<button type="submit" class="btn">送信</button>
+			</div>
+		</form>
+	</main>
 </body>
 
 </html>

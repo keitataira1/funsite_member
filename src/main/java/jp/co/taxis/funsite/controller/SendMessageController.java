@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,48 +26,52 @@ import jp.co.taxis.funsite.service.TopicService;
 @Controller
 @RequestMapping("message")
 public class SendMessageController {
-	
+
 	@Autowired
 	private SupportMessageService supportMessageService;
-	
+
 	@Autowired
 	private TopicService topicService;
-	
+
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private UserDto userDto;
 
-	@GetMapping("send")
-	public String send(@RequestParam("id") int id,@ModelAttribute("text") MessageForm text, Model model) {
-		
+	@RequestMapping("send")
+	public String send(@RequestParam("id") int id, @ModelAttribute("text") MessageForm text, Model model) {
+
+		if (userDto.getMemberEntity() == null) {
+			return "redirect:user/login";
+		}
+
 		text.setTopicId(id);
-		
-		TopicEntity topic = new TopicEntity();
-		topic = topicService.getTopic(id);
-		model.addAttribute(topic);
-		
+
+		TopicEntity topic = topicService.getTopic(id);
+		model.addAttribute("topic", topic);
+
 		List<SupportMessageEntity> messageList = new ArrayList<SupportMessageEntity>();
 		messageList = supportMessageService.MessageByTopicId(id);
-		model.addAttribute(messageList);
-		
-		return "message/send";
+		model.addAttribute("messageList", messageList);
+
+		return "send";
 	}
-	
+
 	@PostMapping("register")
-	public String register(@ModelAttribute("text") @Validated MessageForm text, BindingResult result, RedirectAttributes redirectAttributes) {
-		
+	public String register(@ModelAttribute("text") @Validated MessageForm text, BindingResult result,
+			RedirectAttributes redirectAttributes) {
+
 		SupportMessageEntity message = new SupportMessageEntity();
 		message.setMember(memberService.selectById(userDto.getMemberEntity().getId()));
 		message.setMessage(text.getMessage());
 		message.setTopic(topicService.getTopic(text.getTopicId()));
 		message.setSendDatetime(LocalDate.now());
 		supportMessageService.insert(message);
-		
-		redirectAttributes.addFlashAttribute("id", text.getTopicId());
-		
+
+		redirectAttributes.addAttribute("id", text.getTopicId());
+
 		return "redirect:send";
 	}
-	
+
 }

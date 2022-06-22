@@ -35,4 +35,9 @@ public class TopicService {
 		}
 		return topicList;
 	}
+	
+	public List<TopicEntity> getPlayerTopic(Integer id){
+		List<TopicEntity> topicList = topicRepository.selectPlayerTopic(id);
+		return topicList;
+	}
 }

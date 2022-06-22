@@ -22,9 +22,16 @@
             <li>
                 <a href="user/input">入会</a>
             </li>
-            <li>
-                <a href="user/login">ログイン</a>
-            </li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li>
+                	<a href="user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="user/logout">ログイン</a>
+            	</li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
 	                <span th:text="${@userDto.memberEntity.displayName}"></span>
@@ -48,15 +55,15 @@
                 <th>順位</th>
                 <th>TOPIC</th>
             </tr>
-            <tr th:each="topic,count : ${topicList}">
-                <td th:text="${count}"></td>
+            <tr th:each="topic,elementStat : ${topicList}">
+                <td th:text="${elementStat.count}"></td>
                 <td th:text="${topic.topic}"></td>
             </tr>
         </table>
         <ul>
             <li th:each="player : ${playerList}">
                 <div>
-                    <a href="player/detail">
+                    <a th:href="@{/player/detail(id=${player.id})}">
                         <img src="${player.image}" />
                     </a>
                 </div>

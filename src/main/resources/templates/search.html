@@ -9,25 +9,32 @@
 
 <body>
 
-  <form th:action="@{/player/search}" method="post" th:object="${player}">
+  <form th:action="@{/player/test}" method="post" th:object="${playerList}">
     <nav>
         <ul>
 
             <li>
-                <a href="../index.html">トップ</a>
+                <a href="../index">トップ</a>
             </li>
             <li>
                 選手検索
             </li>
             <li>
-                <a href="../message/list.html">応援メッセージ</a>
+                <a href="../message/list">応援メッセージ</a>
             </li>
             <li>
-                <a href="../user/input.html">入会</a>
+                <a href="../user/input">入会</a>
             </li>
-             <li>
-                <a href="user/login">ログイン</a>
-            </li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li>
+                	<a href="../user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="../user/logout">ログイン</a>
+            	</li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
 	                <span th:text="${@userDto.memberEntity.displayName}"></span>
@@ -44,7 +51,7 @@
     </nav>
     <main>
         <div>
-            <input type="text" th:field="*{name}" />
+            <input type="text" name="name" th:value="${name}" />
             <input type="submit" value="検索" />
         </div>
         <div id="message">メッセージエリア</div>
@@ -61,9 +68,9 @@
                         ポジション
                     </td>
                 </tr>
-                <tr th:eath="player:${playerList}" >
+                <tr th:each="player:${playerList}" >
                     <td>
-                        <a href="detail.html" th:text="${player.name}"></a>
+                        <a th:href="@{/player/detail(id=${player.id})}" th:text="${player.name}"></a>
                     </td>
                     <td th:text="${player.birthday}">                        
                     </td>

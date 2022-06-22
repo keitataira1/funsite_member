@@ -16,17 +16,24 @@
                 トップ
             </li>
             <li>
-                <a href="player/search">選手検索</a>
+                <a href="../player/search">選手検索</a>
             </li>
             <li>
-                <a href="message/list">応援メッセージ</a>
+                <a href="../message/list">応援メッセージ</a>
             </li>
             <li>
-                <a href="user/input">入会</a>
+                <a href="../user/input">入会</a>
             </li>
-            <li>
-                <a href="user/login">ログイン</a>
-            </li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li>
+                	<a href="../user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="../user/logout">ログイン</a>
+            	</li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
 	                <span th:text="${@userDto.memberEntity.displayName}"></span>
@@ -45,7 +52,7 @@
         <form action="complete.html">
            <div style="width:100%;"></div>
             <div>
-                〇〇〇さんの会員登録が終了しました。
+            [[${user.memberName}]]さんの会員登録が終了しました。
             </div>
         </form>
     </main>

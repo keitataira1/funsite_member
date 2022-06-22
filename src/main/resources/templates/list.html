@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="utf-8" />
     <title>応援メッセージ一覧</title>
     <link rel="stylesheet" href="../css/common.css" />
+    <script src="js/list.js"></script>
 </head>
 
 <body>
@@ -12,20 +13,27 @@
         <ul>
             
             <li>
-                <a href="../index.html">トップ</a>
+                <a href="/index">トップ</a>
             </li>
             <li>
-                <a href="../player/search.html">選手検索</a>
+                <a href="/player/search">選手検索</a>
             </li>
             <li>
                 応援メッセージ
             </li>
             <li>
-                <a href="../user/input.html">入会</a>
+                <a href="/user/input">入会</a>
             </li>
-             <li>
-                <a href="user/login">ログイン</a>
-            </li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li>
+                	<a href="/user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="/user/logout">ログイン</a>
+            	</li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
 	                <span th:text="${@userDto.memberEntity.displayName}"></span>
@@ -57,16 +65,12 @@
                         メッセージ
                     </td>
                 </tr>
-                <tr th:eath="message:${supportMessageList}" >
-                    <td th:text="${message.send_datetime}">
-                    </td>
-                    <td th:text="${message.member.displayName}">
-                    </td>
-                    <td th:text="${message.topic.player.name}">
-                    </td>
-                    <td th:text="${message.message}">
-                        <textarea readonly rows="10" cols="50">
-                        </textarea>
+                <tr th:each="message:${supportMessageList}" >
+                    <td th:text="${message.sendDatetime}"></td>
+                    <td th:text="${message.member.displayName}"></td>
+                    <td th:text="${message.topic.player.name}"></td>
+                    <td >
+                        <textarea readonly rows="10" cols="50" th:text="${message.message}"></textarea>
                     </td>
                  </tr>
             </table>

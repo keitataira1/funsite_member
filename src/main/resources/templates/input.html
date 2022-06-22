@@ -24,9 +24,16 @@
             <li>
                 入会
             </li>
-             <li>
-                <a href="../user/login">ログイン</a>
-            </li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li>
+                	<a href="../user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="../user/logout">ログイン</a>
+            	</li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 	            <li>
 	                <span th:text="${@userDto.memberEntity.displayName}"></span>
@@ -103,6 +110,7 @@
             <span th:if="${#fields.hasErrors('birthday')}" th:errors="*{birthday}"></span>
             <span th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
             <span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"></span>
+            <div th:if="message">[[${message}]]</div>
             <input type="submit" value="確認" />
         </form>
      </main>  

@@ -31,13 +31,15 @@ public class MemberService {
 			throw new ApplicationException("register_mail.error");
 		}	
 		
-		MemberEntity returnName = memberRepository.selectByName(member.getName());
+		MemberEntity returnName = memberRepository.selectByDisplayName(member.getDisplayName());
 		
 		if(returnName != null) {
 			throw new ApplicationException("register_name.error");
 			
 		}
 
+		member.setInvalidFlg(false);
+		member.setVersion(1);
 		MemberEntity resultMember = memberRepository.save(member);
 		return resultMember;
 	}

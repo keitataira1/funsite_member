@@ -8,72 +8,72 @@
 <link rel="stylesheet" href="../css/balloon.css" />
 </head>
 <body>
-	<form th:action="@{player/detail}" method="post" th:object="${player}">
-		<nav>
-			<ul>
+	<nav>
+		<ul>
 
-				<li><a href="../index.html">トップ</a></li>
-				<li><a href="search.html">選手検索</a></li>
-				<li><a href="../message/list.html">応援メッセージ</a></li>
-				<li><a href="../user/input.html">入会</a></li>
-				 <li>
-                <a href="user/login">ログイン</a>
-            </li>
+			<li><a href="../index">トップ</a></li>
+			<li><a href="search">選手検索</a></li>
+			<li><a href="../message/list">応援メッセージ</a></li>
+			<li><a href="../user/input">入会</a></li>
 			<th:block th:if="${@userDto.memberEntity != null}">
-	            <li>
-	                <span th:text="${@userDto.memberEntity.displayName}"></span>
-	            </li>
+            	<li>
+                	<a href="../user/login">ログアウト</a>
+            	</li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li>
+            		<a href="../user/logout">ログイン</a>
+            	</li>
+            </th:block>
+			<th:block th:if="${@userDto.memberEntity != null}">
+				<li><span th:text="${@userDto.memberEntity.displayName}"></span>
+				</li>
 			</th:block>
 			<th:block th:if="${@userDto.memberEntity == null}">
-	            <li>
-	                ゲスト
-	            </li>
+				<li>ゲスト</li>
 			</th:block>
-            <li class="clear">
-            </li>
-			</ul>
-		</nav>
-		<main>
-			<div style="width: 100%;">
-				<div style="width: 70%; float: left; padding: 0; margin: 0;">
-					<table>
-						<tr th:each="player:${player}">
-							<td>選手名</td>
-							<td th:text="${player.name}"></td>
+			<li class="clear"></li>
+		</ul>
+	</nav>
+	<main>
+		<div style="width: 100%;">
+			<div style="width: 70%; float: left; padding: 0; margin: 0;">
+				<table>
+					<tr>
+						<td>選手名</td>
+						<td th:text="${player.name}"></td>
+					</tr>
 
-							<td>生年月日</td>
-							<td th:text="${player.birthday}"></td>
+					<tr>
+						<td>生年月日</td>
+						<td th:text="${player.birthday}"></td>
+					</tr>
 
-							<td>星座</td>
-							<td th:text="${player.constellation}"></td>
+					<tr>
+						<td>星座</td>
+						<td th:text="${seiza}"></td>
+					</tr>
 
-							<td>ポジション</td>
-							<td th:text="${player.position}"></td>
+					<tr>
+						<td>ポジション</td>
+						<td th:text="${player.position}"></td>
+					</tr>
 
-							<td>コメント</td>
-							<td th:text="${player.comment}"></td>
-						</tr>
-					</table>
-				</div>
-				<div
-					style="width: 30%; padding: 0; margin: 0; float: left; text-align: center;">
-					<img src="../img/player.image" />
-				</div>
-				<div style="margin: 0; padding: 0; clear: left;"></div>
+					<tr>
+						<td>コメント</td>
+						<td th:text="${player.comment}"></td>
+					</tr>
+				</table>
 			</div>
-			<h1 style="text-align: center;">
-				<a href="../message/send.html" target="_blank"
-					th:href="@{/message/send (id=${topic.id})}"></a>
-			</h1>
-			<h1 style="text-align: center;">
-				<a href="../message/send.html" target="_blank"
-					th:href="@{/message/send (id=${topic.id})}"></a>
-			</h1>
-			<h1 style="text-align: center;">
-				<a href="../message/send.html" target="_blank"
-					th:href="@{/message/send (id=${topic.id})}"></a>
-			</h1>
-		</main>
-	</form>
+			<div
+				style="width: 30%; padding: 0; margin: 0; float: left; text-align: center;">
+				<img src="${player.image}" />
+			</div>
+			<div style="margin: 0; padding: 0; clear: left;"></div>
+		</div>
+		<h1 th:each="topic : ${topicList}" style="text-align: center;">
+			<a th:href="@{/message/send(id=${topic.id})}" th:text="${topic.topic}" target="_blank"></a>
+		</h1>
+	</main>
 </body>
 </html>

@@ -70,8 +70,7 @@ public class JoinMemberController {
 		memberEntity.setBirthday(memberForm.getBirthday());
 		memberEntity.setPostNumber(memberForm.getPostalCode());
 		memberEntity.setAddress(memberForm.getAddress());
-		memberEntity.setInvalidFlg(true);
-		memberEntity.setVersion(1);
+		
 
 		try {
 			memberService.insert(memberEntity);
