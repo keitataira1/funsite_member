@@ -108,7 +108,7 @@ public class MemberRepositoryTest {
 	public void testSelectByName_005_0件() {
 
 		// テスト対象メソッド実行
-		MemberEntity actual = memberRepository.selectByName("%なし%");
+		MemberEntity actual = memberRepository.selectByDisplayName("%なし%");
 
 		// 期待値
 		MemberEntity expected =null;
@@ -128,7 +128,7 @@ public class MemberRepositoryTest {
 	public void testSelectByName_006_1件() {
 
 		// テスト対象メソッド実行
-		MemberEntity actual = memberRepository.selectByName("山田太郎");
+		MemberEntity actual = memberRepository.selectByDisplayName("山田太郎");
 
 		// 期待値
 		MemberEntity expected = new MemberEntity(1, "a@gmail.com", "abc", "山田太郎", "山田", null, "1", "東京都", true, 1);
