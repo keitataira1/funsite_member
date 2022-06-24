@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class FileUtil {
 
-	public static final String FILE_PATH = "E:\\workspace\\temp\\";
+	public static final String FILE_PATH = "C:\\funsite\\image\\";
 
 	/**
 	 * ファイル保存メソッド.
