@@ -26,6 +26,11 @@ public class ItemService {
 		ItemEntity item = itemRepository.findById(id).orElse(null);
 		return item;
 	}
+	
+	public ItemEntity itemInsert(ItemEntity item) {
+		ItemEntity resultItem=itemRepository.save(item);
+		return resultItem;
+	}
 
 
 }
