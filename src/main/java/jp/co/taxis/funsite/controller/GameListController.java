@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.co.taxis.funsite.entity.GameEntity;
+import jp.co.taxis.funsite.entity.MemberEntity;
 import jp.co.taxis.funsite.service.GameService;
 
 @Controller
@@ -30,19 +31,24 @@ public class GameListController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "ticket/list", method = { RequestMethod.GET })
+	@RequestMapping(value = "list", method = { RequestMethod.GET, RequestMethod.POST })
 	public String gameList(Model model) {
 
 		List<GameEntity> gameList = gameService.selectAll();
 		
-		//DMに試合情報がない場合
+		//出力
+		model.addAttribute("gameList", gameList);
+
+		MemberEntity member = new MemberEntity();
+		model.addAttribute("member", member);
+
+		// DBに試合情報がない場合
 		if (gameList.isEmpty()) {
 			String message = messageSource.getMessage("list.empty.error", null, Locale.getDefault());
 			model.addAttribute("message", message);
 		}
-		model.addAttribute("gameList", gameList);
 
-		return "ticket/list";
+		return "ticket_list";
 	}
 
 }
