@@ -24,10 +24,10 @@ public class GameEntity {
 	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "datetime")
+	@Column(name = "match_date")
 	private LocalDate datetime;
 
-	@Column(name = "team")
+	@Column(name = "match_team")
 	private String team;
 
 	@Column(name = "place")
