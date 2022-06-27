@@ -41,7 +41,7 @@
 				<tr th:each="ticket : ${gameList}">
 					<td>[[${ticket.datetime}]]</td>
 					<td>
-						<p>VS</p> <a th:href="ticket_detail">[[${ticket.team}]]</a>
+						<p>VS</p> <a th:href="@{/ticket/detail(id=${ticket.id})}">[[${ticket.team}]]</a>
 					</td>
 					<td>空席
 						<p>○</p>
