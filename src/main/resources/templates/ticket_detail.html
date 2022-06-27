@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>試合詳細</title>
+<link rel="stylesheet" href="../css/common.css" />
+</head>
+<body>
+	<form th:action="@{/ticket/detail}" method="post" th:object="${game}">
+		<nav>
+			<ul>
+				<li><a href="../index">トップ</a></li>
+				<li><a href="player/search">選手検索</a></li>
+				<li><a href="ticket_list">試合日程</a></li>
+				<li><a href="message/list">応援メッセージ</a></li>
+				<li><a href="item_list">グッズ</a></li>
+				<li><a href="cart">カート</a></li>
+				<li><a href="user/input">入会</a></li>
+				<th:block th:if="${@userDto.memberEntity != null}">
+					<li><a href="../user/logout">ログアウト</a></li>
+				</th:block>
+				<th:block th:if="${@userDto.memberEntity == null}">
+					<li><a href="../user/login">ログイン</a></li>
+				</th:block>
+				<th:block th:if="${@userDto.memberEntity != null}">
+					<li><span th:text="${@userDto.memberEntity.displayName}"></span>
+					</li>
+				</th:block>
+				<th:block th:if="${@userDto.memberEntity == null}">
+					<li>ゲスト</li>
+				</th:block>
+				<li class="clear"></li>
+			</ul>
+		</nav>
+		<main>
+			<div style="width: 100%;">
+				<p style="text-align: center;">
+					<a>チケット選択</a>
+				</p>
+				<p>
+				<table border="1">
+					<tr>
+						<th>S席(指定)</th>
+						<td>空席 〇
+							<p>
+								チケット枚数 <select name="ticket">
+									<option value="1" th:field="*{quantity}">1枚</option>
+									<option value="2" th:field="*{quantity}">2枚</option>
+									<option value="3" th:field="*{quantity}">3枚</option>
+									<option value="4" th:field="*{quantity}">4枚</option>
+									<option value="5" th:field="*{quantity}">5枚</option>
+									<option value="6" th:field="*{quantity}">6枚</option>
+									<option value="7" th:field="*{quantity}">7枚</option>
+									<option value="8" th:field="*{quantity}">8枚</option>
+									<option value="9" th:field="*{quantity}">9枚</option>
+									<option value="10" th:field="*{quantity}">10枚</option>
+								</select>
+							</p>
+							<p>
+								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<th>SA席(指定)</th>
+						<td>空席 〇
+							<p>
+								チケット枚数 <select name="ticket">
+									<option value="1" th:field="*{quantity}">1枚</option>
+									<option value="2" th:field="*{quantity}">2枚</option>
+									<option value="3" th:field="*{quantity}">3枚</option>
+									<option value="4" th:field="*{quantity}">4枚</option>
+									<option value="5" th:field="*{quantity}">5枚</option>
+									<option value="6" th:field="*{quantity}">6枚</option>
+									<option value="7" th:field="*{quantity}">7枚</option>
+									<option value="8" th:field="*{quantity}">8枚</option>
+									<option value="9" th:field="*{quantity}">9枚</option>
+									<option value="10" th:field="*{quantity}">10枚</option>
+								</select>
+							</p>
+							<p>
+								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
+							</p>
+						</td>
+					</tr>
+					<tr>
+						<th>SA席(自由)</th>
+						<td>空席 〇
+							<p>
+								チケット枚数 <select name="ticket">
+									<option value="1" th:field="*{quantity}">1枚</option>
+									<option value="2" th:field="*{quantity}">2枚</option>
+									<option value="3" th:field="*{quantity}">3枚</option>
+									<option value="4" th:field="*{quantity}">4枚</option>
+									<option value="5" th:field="*{quantity}">5枚</option>
+									<option value="6" th:field="*{quantity}">6枚</option>
+									<option value="7" th:field="*{quantity}">7枚</option>
+									<option value="8" th:field="*{quantity}">8枚</option>
+									<option value="9" th:field="*{quantity}">9枚</option>
+									<option value="10" th:field="*{quantity}">10枚</option>
+								</select>
+							</p>
+							<p>
+								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
+							</p>
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" th:field="*{id}"/> <!-- hidden -->
+				<p style="text-align: center;">
+					<a>スタジアム図</a>
+				</p>
+				<p>
+					<img src="images/スタジアム図.png">
+				</p>
+				<p>
+					<a href="tecket/list">試合一覧にもどる</a>
+				</p>
+			</div>
+		</main>
+	</form>
+</body>
+</html>
