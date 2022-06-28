@@ -4,9 +4,10 @@
 <meta charset="UTF-8">
 <title>試合詳細</title>
 <link rel="stylesheet" href="../css/common.css" />
+<script src="js/index.js"></script>
 </head>
 <body>
-	<form th:action="@{/ticket/detail}" method="post" th:object="${game}">
+	<form th:action="@{/ticket/sheet}" method="post" th:object="${game}">
 		<nav>
 			<ul>
 				<li><a href="../index">トップ</a></li>
@@ -39,82 +40,39 @@
 				</p>
 				<p>
 				<table border="1">
-					<tr>
-						<th>S席(指定)</th>
+					<tr th:each="item:${itemList}">
+						<th th:text="${item.name}">S席(指定)</th>
 						<td>空席 〇
 							<p>
-								チケット枚数 <select name="ticket">
-									<option value="1" th:field="*{quantity}">1枚</option>
-									<option value="2" th:field="*{quantity}">2枚</option>
-									<option value="3" th:field="*{quantity}">3枚</option>
-									<option value="4" th:field="*{quantity}">4枚</option>
-									<option value="5" th:field="*{quantity}">5枚</option>
-									<option value="6" th:field="*{quantity}">6枚</option>
-									<option value="7" th:field="*{quantity}">7枚</option>
-									<option value="8" th:field="*{quantity}">8枚</option>
-									<option value="9" th:field="*{quantity}">9枚</option>
-									<option value="10" th:field="*{quantity}">10枚</option>
+								チケット枚数 <select th:field="*{quantity}">
+									<option value="1">1枚</option>
+									<option value="2">2枚</option>
+									<option value="3">3枚</option>
+									<option value="4">4枚</option>
+									<option value="5">5枚</option>
+									<option value="6">6枚</option>
+									<option value="7">7枚</option>
+									<option value="8">8枚</option>
+									<option value="9">9枚</option>
+									<option value="10">10枚</option>
 								</select>
 							</p>
 							<p>
-								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>SA席(指定)</th>
-						<td>空席 〇
-							<p>
-								チケット枚数 <select name="ticket">
-									<option value="1" th:field="*{quantity}">1枚</option>
-									<option value="2" th:field="*{quantity}">2枚</option>
-									<option value="3" th:field="*{quantity}">3枚</option>
-									<option value="4" th:field="*{quantity}">4枚</option>
-									<option value="5" th:field="*{quantity}">5枚</option>
-									<option value="6" th:field="*{quantity}">6枚</option>
-									<option value="7" th:field="*{quantity}">7枚</option>
-									<option value="8" th:field="*{quantity}">8枚</option>
-									<option value="9" th:field="*{quantity}">9枚</option>
-									<option value="10" th:field="*{quantity}">10枚</option>
-								</select>
-							</p>
-							<p>
-								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
-							</p>
-						</td>
-					</tr>
-					<tr>
-						<th>SA席(自由)</th>
-						<td>空席 〇
-							<p>
-								チケット枚数 <select name="ticket">
-									<option value="1" th:field="*{quantity}">1枚</option>
-									<option value="2" th:field="*{quantity}">2枚</option>
-									<option value="3" th:field="*{quantity}">3枚</option>
-									<option value="4" th:field="*{quantity}">4枚</option>
-									<option value="5" th:field="*{quantity}">5枚</option>
-									<option value="6" th:field="*{quantity}">6枚</option>
-									<option value="7" th:field="*{quantity}">7枚</option>
-									<option value="8" th:field="*{quantity}">8枚</option>
-									<option value="9" th:field="*{quantity}">9枚</option>
-									<option value="10" th:field="*{quantity}">10枚</option>
-								</select>
-							</p>
-							<p>
-								<input type="submit" value="カートに入れる" th:field="*{quantity}"/> <br>
+								<input type="hidden" th:field="*{id}" />
+								<button type="submit" name="*{itemId}" th:value="${item.id}">カートに入れる</button><br>
 							</p>
 						</td>
 					</tr>
 				</table>
-				<input type="hidden" th:field="*{id}"/> <!-- hidden -->
 				<p style="text-align: center;">
 					<a>スタジアム図</a>
 				</p>
 				<p>
-					<img src="images/スタジアム図.png">
+					<img
+						src="https://soccerkansen-torisetsu.com/wp-content/uploads/2019/09/656277a87b7a48a918c4baac4d967f01.png">
 				</p>
 				<p>
-					<a href="tecket/list">試合一覧にもどる</a>
+					<a href="list">試合一覧にもどる</a>
 				</p>
 			</div>
 		</main>

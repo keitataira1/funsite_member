@@ -13,28 +13,32 @@ import jp.co.taxis.funsite.repository.ItemRepository;
 @Transactional
 @Service
 public class ItemService {
-	
+
 	@Autowired
 	private ItemRepository itemRepository;
-	
+
 	public List<ItemEntity> selectAll() {
-		List<ItemEntity> itemList=itemRepository.findAll();
+		List<ItemEntity> itemList = itemRepository.findAll();
 		return itemList;
 	}
-	
+
 	public ItemEntity selectById(Integer id) {
 		ItemEntity item = itemRepository.findById(id).orElse(null);
 		return item;
 	}
-	
+
 	public ItemEntity itemInsert(ItemEntity item) {
-		ItemEntity resultItem=itemRepository.save(item);
+		ItemEntity resultItem = itemRepository.save(item);
 		return resultItem;
 	}
 
-
 	public List<ItemEntity> selectLikeName(String searchWord) {
-		List<ItemEntity> searchList = itemRepository.selectLikeName("%"+searchWord+"%");
+		List<ItemEntity> searchList = itemRepository.selectLikeName("%" + searchWord + "%");
 		return searchList;
+	}
+
+	public List<ItemEntity> selectTicket(Integer id) {
+		List<ItemEntity> gameItem = itemRepository.selectTicket(id);
+		return gameItem;
 	}
 }

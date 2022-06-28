@@ -13,5 +13,8 @@ import jp.co.taxis.funsite.entity.ItemEntity;
 public interface ItemRepository extends JpaRepository<ItemEntity,Integer> {
 	@Query("SELECT i FROM ItemEntity i WHERE i.name LIKE :searchWord")
 	public List<ItemEntity> selectLikeName(@Param("searchWord") String searchWord);
+	
+	@Query(nativeQuery = true, value = "SELECT * FROM item WHERE game_id = :id")
+	List<ItemEntity> selectTicket(Integer id);
 
 }
