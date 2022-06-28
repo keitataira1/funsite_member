@@ -16,15 +16,11 @@
 			<li><a href="../message/list">応援メッセージ</a></li>
 			<li><a href="../user/input">入会</a></li>
 			<th:block th:if="${@userDto.memberEntity != null}">
-            	<li>
-                	<a href="../user/logout">ログアウト</a>
-            	</li>
-            </th:block>
-            <th:block th:if="${@userDto.memberEntity == null}">
-            	<li>
-            		<a href="../user/login">ログイン</a>
-            	</li>
-            </th:block>
+				<li><a href="../user/logout">ログアウト</a></li>
+			</th:block>
+			<th:block th:if="${@userDto.memberEntity == null}">
+				<li><a href="../user/login">ログイン</a></li>
+			</th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
 				<li><span th:text="${@userDto.memberEntity.displayName}"></span>
 				</li>
@@ -36,36 +32,53 @@
 		</ul>
 	</nav>
 	<main>
-	<form th:action="@{/item/complete}" method="post" th:object="${cart}">
-		<div style="width: 100%;">
-			<div style="width: 70%; float: left; padding: 0; margin: 0;">
-				<table>
-					<tr>
-						<td>商品名</td>
-						<td th:text="${item.name}"></td>
-					</tr>
+		<form th:action="@{/item/complete}" method="post" th:object="${cart}">
+			<div style="width: 100%;">
+				<div style="width: 70%; float: left; padding: 0; margin: 0;">
+					<table>
+						<tr>
+							<td>商品名</td>
+							<td th:text="${item.name}"></td>
+						</tr>
 
-					<tr>
-						<td>値段</td>
-						<td th:text="${item.price}"></td>
-					</tr>
+						<tr>
+							<td>値段</td>
+							<td th:text="${item.price}"></td>
+						</tr>
 
-					<tr>
-						<td>商品説明</td>
-						<td th:text="${item.itemExplain}"></td>
-					</tr>
+						<tr>
+							<td>商品説明</td>
+							<td th:text="${item.itemExplain}"></td>
+						</tr>
 
-				</table>
+					</table>
+				</div>
+				<div
+					style="width: 30%; padding: 0; margin: 0; float: left; text-align: center;">
+					<img th:src="${item.img}" />
+				</div>
+				<p>
+					個数 <select th:field="*{count}">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+					</select>
+				</p>
+				<div style="margin: 0; padding: 0; clear: left;"></div>
 			</div>
-			<div
-				style="width: 30%; padding: 0; margin: 0; float: left; text-align: center;">
-				<img th:src="${item.img}" />
-			</div>
-			<div style="margin: 0; padding: 0; clear: left;"></div>
-		</div>
-		<input type="hidden" th:field="*{id}"/>
-		
-		<input type="submit" value="カートに入れる"/>
+			<input type="hidden" th:field="*{id}" /> <input type="submit"
+				value="カートに入れる" />
+			<th:block th:if="${@itemDto.orderDetailEntity != null}">
+				<li><span th:text="${@itemDto.orderDetailEntity.item.name}"></span>
+				</li>
+			</th:block>
 		</form>
 	</main>
 </body>

@@ -49,9 +49,8 @@ public class ItemDetailController {
 		orderItem.setItem(itemService.selectById(cartItem.getId()));
 		orderItem.setMember(userDto.getMemberEntity());
 		orderItem.setOrderDate(LocalDate.now());
-		//orderItem.setQuantity(cartItem.getCount());
-		orderItem.setQuantity(10);
-		
+		orderItem.setQuantity(cartItem.getCount());
+
 		itemDto.setOrderDetailEntity(orderItem);
 
 		redirectAttributes.addAttribute("id", cartItem.getId());
