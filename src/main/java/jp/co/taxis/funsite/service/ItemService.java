@@ -33,4 +33,8 @@ public class ItemService {
 	}
 
 
+	public List<ItemEntity> selectLikeName(String searchWord) {
+		List<ItemEntity> searchList = itemRepository.selectLikeName("%"+searchWord+"%");
+		return searchList;
+	}
 }

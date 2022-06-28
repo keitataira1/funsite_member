@@ -8,6 +8,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,22 +34,43 @@ public class ItemListController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "list", method = { RequestMethod.GET })
-	public String list(@ModelAttribute("search") SearchForm searchForm, BindingResult result, Model model) {
-
-		if (result.hasErrors()) {
-			return "item_list";
-		}
+	@RequestMapping(value = "/list", method = { RequestMethod.GET })
+	public String list(@ModelAttribute("search") SearchForm searchForm,Model model) {
 
 		List<ItemEntity> itemList = itemService.selectAll();
 		if (itemList.isEmpty()) {
-			String message = messageSource.getMessage("list.empty.error", null, Locale.getDefault());
+			String message = messageSource.getMessage("itemList.empty.error", null, Locale.getDefault());
 			model.addAttribute("message", message);
 		}
-		searchForm.getSearchWord();
+		
 		model.addAttribute("itemList", itemList);
+		
+		return "item_list";
+
+	}
+	
+	
+
+	@RequestMapping(value = "/search", method = { RequestMethod.POST })
+	public String searchList(@ModelAttribute("search") @Validated SearchForm searchForm, BindingResult result, Model model) {
+		
+		
+		if (result.hasErrors()) {
+			List<ItemEntity> itemList = itemService.selectAll();
+			model.addAttribute("itemList", itemList);
+			return "item_list";
+		}
+
+		List<ItemEntity> itemSearchList = itemService.selectLikeName(searchForm.getSearchWord());
+		if (itemSearchList.isEmpty()) {
+			String message = messageSource.getMessage("itemSearch.empty.error", null, Locale.getDefault());
+			model.addAttribute("message", message);
+		}
+
+		model.addAttribute("itemSearchList", itemSearchList);
 
 		return "item_list";
+
 	}
 
 }
