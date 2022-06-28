@@ -36,7 +36,7 @@
 		</ul>
 	</nav>
 	<main>
-	<form th:action="@{item/complete}" method="post">
+	<form th:action="@{/item/complete}" method="post" th:object="${cart}">
 		<div style="width: 100%;">
 			<div style="width: 70%; float: left; padding: 0; margin: 0;">
 				<table>
@@ -46,12 +46,12 @@
 					</tr>
 
 					<tr>
-						<td>生年</td>
+						<td>値段</td>
 						<td th:text="${item.price}"></td>
 					</tr>
 
 					<tr>
-						<td>ポジション</td>
+						<td>商品説明</td>
 						<td th:text="${item.itemExplain}"></td>
 					</tr>
 
@@ -63,17 +63,9 @@
 			</div>
 			<div style="margin: 0; padding: 0; clear: left;"></div>
 		</div>
-		
-		<select th:field="** {percentage}">
-    		<option th:each="i : ${#numbers.sequence(0, 99)}" th:value="${i}" th:text="${i}">
-    		</option>
-		</select>
-		
-		<input type="hidden" name="count" th:field="${i}"/>
-		<input type="hidden" name="item" th:field="${item}"/>
+		<input type="hidden" th:field="*{id}"/>
 		
 		<input type="submit" value="カートに入れる"/>
-		<span th:if="message">[[${message}]]</span>
 		</form>
 	</main>
 </body>
