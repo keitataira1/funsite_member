@@ -64,7 +64,7 @@
             <li th:each="player : ${playerList}">
                 <div>
                     <a th:href="@{/player/detail(id=${player.id})}">
-                        <img src="${player.image}" />
+                        <img th:src="${player.image}" />
                     </a>
                 </div>
                 <div th:text="${player.name}">選手</div>

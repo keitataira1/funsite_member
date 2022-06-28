@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import jp.co.taxis.funsite.entity.SupportMessageEntity;
+import jp.co.taxis.funsite.exception.ApplicationException;
 import jp.co.taxis.funsite.repository.SupportMessageRepository;
 
 @Service
@@ -19,6 +20,11 @@ public class SupportMessageService {
 	/** メッセージを日付の若い順から取得するメソッド */
 	public List<SupportMessageEntity> selectAll() {
 		List<SupportMessageEntity> supportMessageList = supportMessageRepository.selectByMessage();
+		
+		if (supportMessageList == null || supportMessageList.size() == 0) {
+			throw new ApplicationException("message_list.error");
+		}
+		
 		return supportMessageList;
 	}
 

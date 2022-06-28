@@ -36,44 +36,45 @@
 		</ul>
 	</nav>
 	<main>
+	<form th:action="@{item/complete}" method="post">
 		<div style="width: 100%;">
 			<div style="width: 70%; float: left; padding: 0; margin: 0;">
 				<table>
 					<tr>
-						<td>選手名</td>
-						<td th:text="${player.name}"></td>
+						<td>商品名</td>
+						<td th:text="${item.name}"></td>
 					</tr>
 
 					<tr>
-						<td>生年月日</td>
-						<td th:text="${player.birthday}"></td>
-					</tr>
-
-					<tr>
-						<td>星座</td>
-						<td th:text="${seiza}"></td>
+						<td>生年</td>
+						<td th:text="${item.price}"></td>
 					</tr>
 
 					<tr>
 						<td>ポジション</td>
-						<td th:text="${player.position}"></td>
+						<td th:text="${item.itemExplain}"></td>
 					</tr>
 
-					<tr>
-						<td>コメント</td>
-						<td th:text="${player.comment}"></td>
-					</tr>
 				</table>
 			</div>
 			<div
 				style="width: 30%; padding: 0; margin: 0; float: left; text-align: center;">
-				<img th:src="${player.image}" />
+				<img th:src="${item.img}" />
 			</div>
 			<div style="margin: 0; padding: 0; clear: left;"></div>
 		</div>
-		<h1 th:each="topic : ${topicList}" style="text-align: center;">
-			<a th:href="@{/message/send(id=${topic.id})}" th:text="${topic.topic}" target="_blank"></a>
-		</h1>
+		
+		<select th:field="** {percentage}">
+    		<option th:each="i : ${#numbers.sequence(0, 99)}" th:value="${i}" th:text="${i}">
+    		</option>
+		</select>
+		
+		<input type="hidden" name="count" th:field="${i}"/>
+		<input type="hidden" name="item" th:field="${item}"/>
+		
+		<input type="submit" value="カートに入れる"/>
+		<span th:if="message">[[${message}]]</span>
+		</form>
 	</main>
 </body>
 </html>

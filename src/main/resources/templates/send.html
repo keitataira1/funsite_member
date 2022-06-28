@@ -42,18 +42,18 @@
 				</div>
 			</div>
 
-
 			<div>
 				<textarea rows="10" cols="70" placeholder="メッセージを入力"
 					th:field="*{message}"></textarea>
 			</div>
-
-			<input type="hidden" th:field="*{topicId}" /> <input type="hidden"
-				th:field="*{message}" />
+			
+			<input type="hidden" th:field="*{topicId}" />
+			<span th:if="${#fields.hasErrors('message')}" th:errors="*{message}"></span>
 
 			<div>
 				<button type="submit" class="btn">送信</button>
 			</div>
+			
 		</form>
 	</main>
 </body>

@@ -1,7 +1,6 @@
 package jp.co.taxis.funsite.controller;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -43,24 +41,22 @@ public class SendMessageController {
 	public String send(@RequestParam("id") int id, @ModelAttribute("text") MessageForm text, Model model) {
 
 		if (userDto.getMemberEntity() == null) {
-			return "redirect:user/login";
+			return "redirect:../user/login";
 		}
-
-		text.setTopicId(id);
-
-		TopicEntity topic = topicService.getTopic(id);
-		model.addAttribute("topic", topic);
-
-		List<SupportMessageEntity> messageList = new ArrayList<SupportMessageEntity>();
-		messageList = supportMessageService.MessageByTopicId(id);
-		model.addAttribute("messageList", messageList);
+		
+		AddAttribute(text, id, model);
 
 		return "send";
 	}
 
-	@PostMapping("register")
+	@RequestMapping("register")
 	public String register(@ModelAttribute("text") @Validated MessageForm text, BindingResult result,
-			RedirectAttributes redirectAttributes) {
+			RedirectAttributes redirectAttributes,Model model) {
+		
+		if(result.hasErrors()) {
+			AddAttribute(text,text.getTopicId(), model);
+			return "send";
+		}
 
 		SupportMessageEntity message = new SupportMessageEntity();
 		message.setMember(memberService.selectById(userDto.getMemberEntity().getId()));
@@ -68,10 +64,21 @@ public class SendMessageController {
 		message.setTopic(topicService.getTopic(text.getTopicId()));
 		message.setSendDatetime(LocalDate.now());
 		supportMessageService.insert(message);
-
+		
 		redirectAttributes.addAttribute("id", text.getTopicId());
 
 		return "redirect:send";
+	}
+	
+	private void AddAttribute(@ModelAttribute("text") MessageForm text, int id,Model model) {
+		
+		text.setTopicId(id);
+		
+		TopicEntity topic = topicService.getTopic(id);
+		model.addAttribute("topic", topic);
+		
+		List<SupportMessageEntity> messageList = supportMessageService.MessageByTopicId(id);
+		model.addAttribute("messageList",messageList);
 	}
 
 }
