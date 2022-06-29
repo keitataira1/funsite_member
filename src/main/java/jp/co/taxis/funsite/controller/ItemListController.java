@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import jp.co.taxis.funsite.entity.ItemEntity;
-import jp.co.taxis.funsite.form.SearchForm;
+import jp.co.taxis.funsite.form.SearchItemForm;
 import jp.co.taxis.funsite.service.ItemService;
 
 @Controller
@@ -35,7 +35,7 @@ public class ItemListController {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = { RequestMethod.GET })
-	public String list(@ModelAttribute("search") SearchForm searchForm,Model model) {
+	public String list(@ModelAttribute("search") SearchItemForm searchItemForm,Model model) {
 
 		List<ItemEntity> itemList = itemService.selectAll();
 		if (itemList.isEmpty()) {
@@ -48,11 +48,9 @@ public class ItemListController {
 		return "item_list";
 
 	}
-	
-	
 
 	@RequestMapping(value = "/search", method = { RequestMethod.POST })
-	public String searchList(@ModelAttribute("search") @Validated SearchForm searchForm, BindingResult result, Model model) {
+	public String searchList(@ModelAttribute("search") @Validated SearchItemForm searchItemForm, BindingResult result, Model model) {
 		
 		
 		if (result.hasErrors()) {
@@ -61,13 +59,13 @@ public class ItemListController {
 			return "item_list";
 		}
 
-		List<ItemEntity> itemSearchList = itemService.selectLikeName(searchForm.getSearchWord());
-		if (itemSearchList.isEmpty()) {
+		List<ItemEntity> itemList = itemService.selectLikeName(searchItemForm.getSearchWord());
+		if (itemList.isEmpty()) {
 			String message = messageSource.getMessage("itemSearch.empty.error", null, Locale.getDefault());
 			model.addAttribute("message", message);
 		}
 
-		model.addAttribute("itemSearchList", itemSearchList);
+		model.addAttribute("itemList", itemList);
 
 		return "item_list";
 

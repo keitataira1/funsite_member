@@ -41,7 +41,6 @@
             <input type="text" th:field="*{searchWord}"/>
             <input type="submit" value="検索" />
         
-        
         <div style="width:100%;">
         <table>
         
@@ -56,14 +55,6 @@
                 <td class="image"><a th:href="@{/item/detail(id=${item.id})}"><img src="${item.img}" width="100"></a></td>           
                 <td><a th:href="@{/item/detail(id=${item.id})}">[[${item.name}]]</a></td>
                 <td th:text="${item.price}"></td>
-            </tr>
-            
-            
-            <!-- 検索商品 -->
-            <tr th:each="search : ${itemSearchList}">
-                <td class="image"><a th:href="@{/item/detail(id=${search.id})}"><img src="${search.img}" width="100"></a></td>           
-                <td><a th:href="@{/item/detail(id=${search.id})}">[[${search.name}]]</a></td>
-                <td th:text="${search.price}"></td>
             </tr>
                    
         </table>

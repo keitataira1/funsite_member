@@ -1,7 +1,7 @@
 package jp.co.taxis.funsite.form;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.Pattern;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,8 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchForm {
+public class SearchItemForm {
 	@NotEmpty
-	@Size(max = 20)
-	private String name;
+	@Pattern(regexp = ".{1,50}")
+	private String searchWord;
+
 }
