@@ -16,15 +16,11 @@ import jp.co.taxis.funsite.dto.UserDto;
 import jp.co.taxis.funsite.entity.ItemEntity;
 import jp.co.taxis.funsite.entity.OrderDetailEntity;
 import jp.co.taxis.funsite.form.TicketForm;
-import jp.co.taxis.funsite.service.GameService;
 import jp.co.taxis.funsite.service.ItemService;
 
 @Controller
 @RequestMapping("ticket")
 public class GameDetailController {
-
-	@Autowired
-	private GameService gameService;
 
 	@Autowired
 	private ItemService itemService;
@@ -45,16 +41,11 @@ public class GameDetailController {
 	@RequestMapping("detail")
 	public String gameDetail(@RequestParam("id") int id, @ModelAttribute("game") TicketForm ticketForm, Model model) {
 
-		// 試合情報を取得する
-		// GameEntity game = new GameEntity();
-		// gameService.selectById(id);
-
 		ticketForm.setId(id);
 
 		List<ItemEntity> itemList = itemService.selectTicket(id);
 
 		// 出力
-		// model.addAttribute("game", game);
 		model.addAttribute("itemList", itemList);
 
 		// Viewの選択
@@ -62,11 +53,11 @@ public class GameDetailController {
 	}
 
 	@RequestMapping("sheet")
-	public String sheet(Model model, @ModelAttribute("game") TicketForm ticketForm,
+	public String sheet(@RequestParam("button") int itemId, Model model, @ModelAttribute("game") TicketForm ticketForm,
 			RedirectAttributes redirectAttributes) {
 		OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
 
-		orderDetailEntity.setItem(itemService.selectById(ticketForm.getId()));
+		orderDetailEntity.setItem(itemService.selectById(itemId));
 		orderDetailEntity.setQuantity(ticketForm.getQuantity());
 		orderDetailEntity.setOrderDate(LocalDate.now());
 		orderDetailEntity.setMember(userDto.getMemberEntity());
