@@ -30,8 +30,8 @@ public class ItemEntity {
 	@Column(name = "price")
 	private Integer price;
 	
-	@Column(name="img")
-	private String img;
+	@Column(name="image")
+	private String image;
 	
 	@Column(name="item_explain")
 	private String itemExplain;
