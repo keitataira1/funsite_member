@@ -57,7 +57,7 @@
                         
             <!-- 商品一覧 -->
             <tr th:each="item : ${itemList}" th:if="${item.game==null}">
-                <td class="image"><a th:href="@{/item/detail(id=${item.id})}"><img src="${item.img}" width="100"></a></td>           
+                <td class="image"><a th:href="@{/item/detail(id=${item.id})}"><img th:src="${item.img}" width="100"></a></td>           
                 <td><a th:href="@{/item/detail(id=${item.id})}">[[${item.name}]]</a></td>
                 <td th:text="${item.price}"></td>
             </tr>

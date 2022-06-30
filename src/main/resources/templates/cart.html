@@ -38,13 +38,13 @@
         <div style="text-align:center">カート</div>
         <div style="width:100%;">
         <h2>
-        <div style="price">小計 ￥[[${price}]]</div>
+        小計 ￥[[${price}]]
         </h2>
         <table>
            <tr th:each="item:${itemCartList}" > 
             <td>
              <a th:href="@{/item/detail(id=${item.itemEntity.id})}">
-                        <img src="${item.itemEntity.img}"/>
+                        <img th:src="${item.itemEntity.img}"/>
              </a>
              </td>           
              <td>
