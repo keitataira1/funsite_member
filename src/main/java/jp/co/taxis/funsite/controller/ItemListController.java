@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -45,5 +47,17 @@ public class ItemListController {
 		
 		return "item_list";
 
+	}
+	
+	@RequestMapping("search")
+	public String seatchTest(@ModelAttribute("search") @Validated SearchItemForm searchForm, BindingResult result,Model model) {
+		
+		if(result.hasErrors()) {
+			return "item_list";
+		}
+		
+		List<ItemEntity> itemList = itemService.selectLikeName(searchForm.getSearchWord());
+		model.addAttribute("itemList",itemList);
+		return "item_list";
 	}
 }

@@ -52,7 +52,8 @@ public class ItemDetailController {
 
 		ItemEntity item = itemService.selectById(cartItem.getId());
 		itemDto.setItemEntity(item);
-
+		
+        userDto.getCountList().add(cartItem.getCount());
 		userDto.getItemDtoList().add(itemDto);
 
 		model.addAttribute("order", order);

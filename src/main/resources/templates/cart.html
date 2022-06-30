@@ -48,7 +48,7 @@
              </a>
              </td>           
              <td>
-                 <a th:href="@{/item/detail(id=${item.itemEntity.id})" th:text="${item.itemEntity.name}"></a>
+                 <a th:href="@{/item/detail(id=${item.itemEntity.id})}">[[${item.itemEntity.name}]]</a>
                  <p>￥[[${item.itemEntity.price}]]</p>
              </td>
             </tr>

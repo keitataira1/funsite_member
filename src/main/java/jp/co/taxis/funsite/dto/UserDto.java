@@ -24,5 +24,7 @@ public class UserDto implements Serializable {
 	 * 商品情報
 	 */
 	private List<ItemDto> itemDtoList = new ArrayList<ItemDto>();
+	
+	private List<Integer> countList= new ArrayList<Integer>();
 
 }

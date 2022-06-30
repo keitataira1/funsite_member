@@ -62,14 +62,6 @@
                 <td th:text="${item.price}"></td>
             </tr>
             
-            
-            <!-- 検索商品 -->
-            <tr th:each="search : ${itemSearchList}" th:if="${item.game==null}">
-                <td class="image"><a th:href="@{/item/detail(id=${search.id})}"><img src="${search.img}" width="100"></a></td>           
-                <td><a th:href="@{/item/detail(id=${search.id})}">[[${search.name}]]</a></td>
-                <td th:text="${search.price}"></td>
-            </tr>
-                   
         </table>
         </div>
       </div>
