@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import jp.co.taxis.funsite.dto.ItemDto;
 import jp.co.taxis.funsite.dto.UserDto;
 import jp.co.taxis.funsite.entity.MemberEntity;
-import jp.co.taxis.funsite.service.OrderDetailService;
-import jp.co.taxis.funsite.service.OrderHeaderService;
 
 @Controller
 @RequestMapping("item")
@@ -18,12 +16,6 @@ public class ItemCartController {
 
 	@Autowired
 	private UserDto userDto;
-
-	@Autowired
-	private OrderHeaderService orderHeaderService;
-
-	@Autowired
-	private OrderDetailService orderDetailService;
 
 	@RequestMapping(value = "cart", method = { RequestMethod.GET, RequestMethod.POST })
 	public String itemCartList(Model model) {
