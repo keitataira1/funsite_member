@@ -44,11 +44,11 @@
            <tr th:each="item:${itemCartList}" > 
             <td>
              <a th:href="@{/item/detail(id=${item.itemEntity.id})}">
-                        <img th:src="${item.itemEntity.img}"/>
+                        <img th:src="${item.itemEntity.img}" width="50"/>
              </a>
              </td>           
              <td>
-                 <a href="@{/item/detail(id=${item.itemEntity.id})" th:text="${item.itemEntity.name}"></a>
+                 <a th:href="@{/item/detail(id=${item.itemEntity.id})" th:text="${item.itemEntity.name}"></a>
                  <p>￥[[${item.itemEntity.price}]]</p>
              </td>
             </tr>
