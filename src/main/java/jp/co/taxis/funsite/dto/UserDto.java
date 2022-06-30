@@ -25,6 +25,4 @@ public class UserDto implements Serializable {
 	 */
 	private List<ItemDto> itemDtoList = new ArrayList<ItemDto>();
 	
-	private List<Integer> countList= new ArrayList<Integer>();
-
 }
