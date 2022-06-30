@@ -4,17 +4,20 @@
 <head>
     <meta charset="utf-8" />
     <title>グッズ一覧</title>
-    <link rel="stylesheet" href="/css/common.css" />
+    <link rel="stylesheet" href="../css/common.css" />
     <script src="js/index.js"></script>
 </head>
 
 <body>
     <nav>
-        <ul>
+       <ul>
             <li><a th:href="@{/index}">トップ</a></li>
             <li><a th:href="@{/player/search}">選手検索</a></li>
+            <li><a th:href="@{/ticket/list}">試合日程</a> </li>
             <li><a th:href="@{/message/list}">応援メッセージ</a></li>
-            <li>入会</li>
+            <li><a th:href="@{/item/list}">グッズ</a></li>
+            <li><a th:href="@{/item/cart}">カート</a></li>
+            <li><a th:href="@{/user/input}">入会</a></li>
             <th:block th:if="${@userDto.memberEntity != null}">
             	<li><a th:href="@{/user/logout}">ログアウト</a></li>
             </th:block>
@@ -35,11 +38,13 @@
     
     <!-- 検索フォーム -->
      <form th:action="@{/item/search}" method="post" th:object="${search}">
-     <div th:if="${#fields.hasErrors('searchWord')}" th:errors="*{searchWord}"></div>
+     <div th:if="${#fields.hasErrors('searchWord')}" th:errors="*{searchWord}"></div>   
             <span th:if="message">[[${message}]]</span>
       <div>
             <input type="text" th:field="*{searchWord}"/>
             <input type="submit" value="検索" />
+            <br>
+            <br>
         
         <div style="width:100%;">
         <table>
@@ -51,10 +56,18 @@
             <tr>
                         
             <!-- 商品一覧 -->
-            <tr th:each="item : ${itemList}">
-                <td class="image"><a th:href="@{/item/detail(id=${item.id})}"><img src="${item.image}" width="100"></a></td>           
+            <tr th:each="item : ${itemList}" th:if="${item.game==null}">
+                <td class="image"><a th:href="@{/item/detail(id=${item.id})}"><img src="${item.img}" width="100"></a></td>           
                 <td><a th:href="@{/item/detail(id=${item.id})}">[[${item.name}]]</a></td>
                 <td th:text="${item.price}"></td>
+            </tr>
+            
+            
+            <!-- 検索商品 -->
+            <tr th:each="search : ${itemSearchList}" th:if="${item.game==null}">
+                <td class="image"><a th:href="@{/item/detail(id=${search.id})}"><img src="${search.img}" width="100"></a></td>           
+                <td><a th:href="@{/item/detail(id=${search.id})}">[[${search.name}]]</a></td>
+                <td th:text="${search.price}"></td>
             </tr>
                    
         </table>

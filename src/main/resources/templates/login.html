@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" >
 
 <head>
     <meta charset="utf-8" />
-    <title>会員登録完了</title>
+    <title>ログイン</title>
     <link rel="stylesheet" href="../css/common.css" />
     <script src="js/index.js"></script>
 </head>
@@ -34,10 +34,27 @@
         </ul>
     </nav>
     <main>
-        <form action="complete.html">
-           <div style="width:100%;"></div>
+        <form action="../index"> <div style="width:100%;">
+            <table>
+                <tr>
+                    <td>
+                        メールアドレス
+                    </td>
+                    <td><input type="text" /></td>
+
+                </tr>
+                <tr>
+                    <td>
+                        パスワード
+                    </td>
+                    <td><input type="password" /></td>
+
+                </tr>
+            </table>
+
+            </div>
             <div>
-            [[${user.memberName}]]さんの会員登録が終了しました。
+                <input type="submit" value="ログイン" />
             </div>
         </form>
     </main>

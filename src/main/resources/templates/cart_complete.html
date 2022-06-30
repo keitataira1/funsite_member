@@ -4,66 +4,40 @@
 <head>
     <meta charset="utf-8" />
     <title>カート</title>
-    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="../css/common.css" />
     <script src="js/index.js"></script>
 </head>
 
 <body>
     <nav>
        <ul>
-            
-            <li>
-                <a href="/index">トップ</a>
-            </li>
-            <li>
-                <a href="/player/search">選手検索</a>
-            </li>
-             <li>
-                <a href="/ticket/ticket_list">試合日程</a>
-            </li>
-            <li>
-                <a href="/message/list">応援メッセージ一覧</a>
-            </li>
-             <li>
-                <a href="/item/item_list">グッズ</a>
-            </li>
-             <li>
-                <a href="/item/cart">カート</a>
-            </li>
-            <li>
-                <a href="/user/input">入会</a>
-            </li>
+            <li><a th:href="@{/index}">トップ</a></li>
+            <li><a th:href="@{/player/search}">選手検索</a></li>
+            <li><a th:href="@{/ticket/list}">試合日程</a> </li>
+            <li><a th:href="@{/message/list}">応援メッセージ</a></li>
+            <li><a th:href="@{/item/list}">グッズ</a></li>
+            <li><a th:href="@{/item/cart}">カート</a></li>
+            <li><a th:href="@{/user/input}">入会</a></li>
             <th:block th:if="${@userDto.memberEntity != null}">
-            	<li>
-                	<a href="/user/logout">ログアウト</a>
-            	</li>
+            	<li><a th:href="@{/user/logout}">ログアウト</a></li>
             </th:block>
             <th:block th:if="${@userDto.memberEntity == null}">
-            	<li>
-            		<a href="/user/login">ログイン</a>
-            	</li>
+            	<li><a th:href="@{/user/login}">ログイン</a></li>
             </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
-	            <li>
-	                <span th:text="${@userDto.memberEntity.displayName}"></span>
-	            </li>
+	            <li><span th:text="${@userDto.memberEntity.displayName}"></span></li>
 			</th:block>
 			<th:block th:if="${@userDto.memberEntity == null}">
-	            <li>
-	                ゲスト
-	            </li>
+	            <li>ゲスト</li>
 			</th:block>
-            <li class="clear">
-            </li>
+            <li class="clear"></li>
         </ul>
     </nav>
     <main>
         <form th:action="@{/item/cart_confirm}" method="post" th:object="${item}">
         <div style="width:100%;">
-        <p>購入が完了しました</p>
+        <div style="text-align:center">購入が完了しました</div>
         </div>
-        <ul>
-        </ul>
         </form>
     </main>
 

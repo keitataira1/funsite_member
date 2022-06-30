@@ -10,28 +10,27 @@
 <body>
 	<nav>
 		<ul>
-			<li><a href="/index">トップ</a></li>
-			<li><a href="/player/search">選手検索</a></li>
-			<li><a>試合日程</a></li>
-			<li><a href="/message/list">応援メッセージ</a></li>
-			<li><a href="/item_list">グッズ</a></li>
-			<li><a href="/cart">カート</a></li>
-			<li><a href="/user/input">入会</a></li>
+            <li><a th:href="@{/index}">トップ</a></li>
+            <li><a th:href="@{/player/search}">選手検索</a></li>
+            <li><a th:href="@{/ticket/list}">試合日程</a> </li>
+            <li><a th:href="@{/message/list}">応援メッセージ</a></li>
+            <li><a th:href="@{/item/list}">グッズ</a></li>
+            <li><a th:href="@{/item/cart}">カート</a></li>
+            <li><a th:href="@{/user/input}">入会</a></li>
+            <th:block th:if="${@userDto.memberEntity != null}">
+            	<li><a th:href="@{/user/logout}">ログアウト</a></li>
+            </th:block>
+            <th:block th:if="${@userDto.memberEntity == null}">
+            	<li><a th:href="@{/user/login}">ログイン</a></li>
+            </th:block>
 			<th:block th:if="${@userDto.memberEntity != null}">
-				<li><a href="../user/logout">ログアウト</a></li>
+	            <li><span th:text="${@userDto.memberEntity.displayName}"></span></li>
 			</th:block>
 			<th:block th:if="${@userDto.memberEntity == null}">
-				<li><a href="../user/login">ログイン</a></li>
+	            <li>ゲスト</li>
 			</th:block>
-			<th:block th:if="${@userDto.memberEntity != null}">
-				<li><span th:text="${@userDto.memberEntity.displayName}"></span>
-				</li>
-			</th:block>
-			<th:block th:if="${@userDto.memberEntity == null}">
-				<li>ゲスト</li>
-			</th:block>
-			<li class="clear"></li>
-		</ul>
+            <li class="clear"></li>
+        </ul>
 	</nav>
 	<main>
 		<div id="message">試合日程一覧</div>
@@ -39,9 +38,12 @@
 			<table th:if="${!#lists.isEmpty(gameList)}" border="1">
 				<!-- ↑一覧の情報が０件の場合、テーブル自体を表示しない -->
 				<tr th:each="ticket : ${gameList}">
-					<td>[[${ticket.datetime}]]</td>
 					<td>
-						<p>VS</p> <a th:href="@{/ticket/detail(id=${ticket.id})}">[[${ticket.team}]]</a>
+					   [[${ticket.datetime}]]
+					   <p>VS[[${ticket.team}]]</p>
+					</td>
+					<td th:each="item:${itemList}" th:if="${item.game!=null}">
+						<a th:href="@{/item/detail(id=${item.id})}">[[${item.name}]]</a>
 					</td>
 					<td>空席
 						<p>○</p>

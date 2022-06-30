@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -34,8 +32,8 @@ public class ItemListController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "/list", method = { RequestMethod.GET })
-	public String list(@ModelAttribute("search") SearchItemForm searchItemForm,Model model) {
+	@RequestMapping(value = "list", method = { RequestMethod.GET })
+	public String list(@ModelAttribute("search") SearchItemForm searchForm,Model model) {
 
 		List<ItemEntity> itemList = itemService.selectAll();
 		if (itemList.isEmpty()) {
@@ -48,27 +46,4 @@ public class ItemListController {
 		return "item_list";
 
 	}
-
-	@RequestMapping(value = "/search", method = { RequestMethod.POST })
-	public String searchList(@ModelAttribute("search") @Validated SearchItemForm searchItemForm, BindingResult result, Model model) {
-		
-		
-		if (result.hasErrors()) {
-			List<ItemEntity> itemList = itemService.selectAll();
-			model.addAttribute("itemList", itemList);
-			return "item_list";
-		}
-
-		List<ItemEntity> itemList = itemService.selectLikeName(searchItemForm.getSearchWord());
-		if (itemList.isEmpty()) {
-			String message = messageSource.getMessage("itemSearch.empty.error", null, Locale.getDefault());
-			model.addAttribute("message", message);
-		}
-
-		model.addAttribute("itemList", itemList);
-
-		return "item_list";
-
-	}
-
 }

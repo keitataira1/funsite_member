@@ -26,6 +26,11 @@ public class OrderHeaderService {
 		OrderHeaderEntity order = orderHeaderRepository.findById(id).orElse(null);
 		return order;
 	}
+	
+	public OrderHeaderEntity insert(OrderHeaderEntity orderHeaderEntity) {
+		OrderHeaderEntity order=orderHeaderRepository.save(orderHeaderEntity);
+		return order;
+	}
 
 
 }

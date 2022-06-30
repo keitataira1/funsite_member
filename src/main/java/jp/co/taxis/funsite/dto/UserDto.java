@@ -1,6 +1,7 @@
 package jp.co.taxis.funsite.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
@@ -18,10 +19,10 @@ public class UserDto implements Serializable {
 	 * ログインユーザ情報
 	 */
 	private MemberEntity memberEntity;
-	
+
 	/**
 	 * 商品情報
 	 */
-	private List<ItemDto> itemDto;
-	
+	private List<ItemDto> itemDtoList = new ArrayList<ItemDto>();
+
 }

@@ -26,6 +26,11 @@ public class OrderDetailService {
 		OrderDetailEntity order = orderDetailRepository.findById(id).orElse(null);
 		return order;
 	}
+	
+	public OrderDetailEntity insert(OrderDetailEntity orderDetailEntity) {
+		OrderDetailEntity order=orderDetailRepository.save(orderDetailEntity);
+		return order;
+	}
 
 
 }

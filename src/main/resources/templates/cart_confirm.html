@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title>購入確認</title>
-    <link rel="stylesheet" href="css/common.css" />
+    <link rel="stylesheet" href="../css/common.css" />
     <script src="js/index.js"></script>
 </head>
 
@@ -13,20 +13,20 @@
         <form th:action="@{/item/cart_complete}" method="post">
          <div style="text-align:center">購入確認</div>
         <div style="width:100%;">
+        <h2>
+        <div style="price">小計 ￥[[${price}]]</div>
+        </h2>
         <table>
-            <tr>        
-                 <td class="image"><a href="item_detail.html"><img src="https://cdn.clipkit.co/tenants/229/item_images/images/000/075/664/medium/8744355c-1275-469a-9c47-1f6031821253.jpg?1555133953" width="100"></a></td>
-                <td class="a">
-                  <a href="item_detail.html">商品名</a>
-                   <p>価格</p>
-               </td>
-            </tr>
-             <tr>        
-                <td>
-                  <p>7/5</p>
-                  <a href="ticket_detail.html">VS○○</a> 
-                  <p>Bスタジアム</p>
-                </td>
+           <tr th:each="item:${itemCartList}" > 
+            <td>
+             <a th:href="@{/item/detail(id=${item.itemEntity.id})}">
+                        <img src="${item.itemEntity.img}"/>
+             </a>
+             </td>           
+             <td>
+                 <a href="@{/item/detail(id=${item.itemEntity.id})" th:text="${item.itemEntity.name}"></a>
+                 <p>￥[[${item.itemEntity.price}]]</p>
+             </td>
             </tr>
         </table>
         <div style="text-align:center">

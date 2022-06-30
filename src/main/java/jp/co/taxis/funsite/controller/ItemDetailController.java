@@ -25,9 +25,6 @@ public class ItemDetailController {
 	private ItemService itemService;
 
 	@Autowired
-	private ItemDto itemDto;
-
-	@Autowired
 	private UserDto userDto;
 
 	@RequestMapping("detail")
@@ -42,16 +39,23 @@ public class ItemDetailController {
 	}
 
 	@RequestMapping("complete")
-	public String complete(@ModelAttribute("cart") CartForm cartItem, RedirectAttributes redirectAttributes) {
+	public String complete(@ModelAttribute("cart") CartForm cartItem, RedirectAttributes redirectAttributes,
+			Model model) {
 
-		OrderDetailEntity orderItem = new OrderDetailEntity();
+		ItemDto itemDto = new ItemDto();
+		OrderDetailEntity order = new OrderDetailEntity();
+		order.setItem(itemService.selectById(cartItem.getId()));
+		order.setMember(userDto.getMemberEntity());
+		order.setOrderDate(LocalDate.now());
+		order.setQuantity(cartItem.getCount());
+		itemDto.setOrderDetailEntity(order);
 
-		orderItem.setItem(itemService.selectById(cartItem.getId()));
-		orderItem.setMember(userDto.getMemberEntity());
-		orderItem.setOrderDate(LocalDate.now());
-		orderItem.setQuantity(cartItem.getCount());
+		ItemEntity item = itemService.selectById(cartItem.getId());
+		itemDto.setItemEntity(item);
 
-		itemDto.setOrderDetailEntity(orderItem);
+		userDto.getItemDtoList().add(itemDto);
+
+		model.addAttribute("order", order);
 
 		redirectAttributes.addAttribute("id", cartItem.getId());
 
